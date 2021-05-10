@@ -1,0 +1,54 @@
+---
+title: "Global FoodOmics Ontology"
+author: "Kiana A West"
+date: "`r Sys.Date()`"
+params:
+  meta_file: "../data/foodomics_metadata_08APR21.txt"
+  obo_file: "../data/global_foodomics_ontology.obo"
+  save_dir: "../output"
+output: 
+  html_document:
+    toc: true
+    theme: cerulean
+---
+
+<style type="text/css">
+.main-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+***  
+
+Load packages
+
+```{r}
+pacman::p_load("GFOPontology", "collapsibleTree")
+options(stringsAsFactors = FALSE)
+```
+
+Read in files
+
+```{r}
+food_meta <- read_delim(params$meta_file, delim = "\t")
+```
+
+Make data frame of relationships
+
+```{r}
+gfop <- convert_onto(params$obo_file, file.path(params$save_dir, "gfop_ontology.txt"))
+```
+
+### Plot ontology
+
+```{r}
+p <- collapsibleTreeSummary(gfop, rev(colnames(gfop)), root = "GFOP ontology", fontSize = 8, height = 500)
+```
+
+Save as html
+
+```{r}
+htmlwidgets::saveWidget(p, file.path(params$save_dir, "gfop_ontology.html"), selfcontained = TRUE)
+```

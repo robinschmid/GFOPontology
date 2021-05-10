@@ -1,0 +1,607 @@
+leaf	parent1	parent2	parent3	parent4	parent5	parent6	parent7
+sunchoke	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+jicama	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+forbidden rice	rice	grain/grass	fruit	plant	NA	NA	NA
+horse, mixed meat	horse meat	horse	meat	animal	NA	NA	NA
+horse, yellow/brown meat	horse meat	horse	meat	animal	NA	NA	NA
+young sweet corn	sweet corn	corn	grain/grass	fruit	plant	NA	NA
+Matcha tea	tea	tea/infusion	vegetable/herb	plant	NA	NA	NA
+cilantro	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+red cherry tomato	cherry tomato	tomato	berry	fleshy fruit	fruit	plant	NA
+stilton cheese	cheese	dairy	animal	NA	NA	NA	NA
+tupiro	berry	fleshy fruit	fruit	plant	NA	NA	NA
+turkey dark meat	turkey meat	turkey	poultry	animal	NA	NA	NA
+horse, brown meat	horse meat	horse	meat	animal	NA	NA	NA
+mackerel, eye lens	mackerel	fish_saltwater	seafood	animal	NA	NA	NA
+anchovy extract	anchovy	fish_saltwater	seafood	animal	NA	NA	NA
+beef tenderloin	beef meat	beef	cow	meat	animal	NA	NA
+red romaine lettuce	lettuce	vegetable	vegetable/herb	plant	NA	NA	NA
+basmati rice	white rice	rice	grain/grass	fruit	plant	NA	NA
+orange thyme	thyme	herb/spice	vegetable/herb	plant	NA	NA	NA
+prosciutto	pork	pig	meat	animal	NA	NA	NA
+purple bean	bean	legume	fruit	plant	NA	NA	NA
+red grape	grape	berry	fleshy fruit	fruit	plant	NA	NA
+dragonfruit	berry	fleshy fruit	fruit	plant	NA	NA	NA
+matcha green tea	tea	tea/infusion	vegetable/herb	plant	NA	NA	NA
+ham	pork	pig	meat	animal	NA	NA	NA
+sumac	berry	fleshy fruit	fruit	plant	NA	NA	NA
+mustard	grain/grass	fruit	plant	NA	NA	NA	NA
+red cabbage	cabbage	flower	vegetable/herb	plant	NA	NA	NA
+fava bean	bean	legume	fruit	plant	NA	NA	NA
+green olive	olive	drupe	fleshy fruit	fruit	plant	NA	NA
+pomegranate	berry	fleshy fruit	fruit	plant	NA	NA	NA
+natural cheese	cheese	dairy	animal	NA	NA	NA	NA
+vitamin E thiamine	supplement	NA	NA	NA	NA	NA	NA
+red rice	rice	grain/grass	fruit	plant	NA	NA	NA
+turkey outer surface	turkey meat	turkey	poultry	animal	NA	NA	NA
+brie cheese	cheese	dairy	animal	NA	NA	NA	NA
+cantelope melon	melon	pepo	fleshy fruit	fruit	plant	NA	NA
+smelt, skin	smelt	fish_saltwater	seafood	animal	NA	NA	NA
+orange cherry tomato	cherry tomato	tomato	berry	fleshy fruit	fruit	plant	NA
+african catfish	catfish	fish_freshwater	seafood	animal	NA	NA	NA
+hay	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+ginger	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+garlic powder	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+lizard body	lizard	reptile	animal	NA	NA	NA	NA
+salami	pork	pig	meat	animal	NA	NA	NA
+lizard head	lizard	reptile	animal	NA	NA	NA	NA
+green tomato	tomato	berry	fleshy fruit	fruit	plant	NA	NA
+collard greens	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+short grain brown rice	brown rice	rice	grain/grass	fruit	plant	NA	NA
+sauvignon blanc, white	white wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+morel	mushroom	fungi	NA	NA	NA	NA	NA
+silkworm	worm	invertebrate	animal	NA	NA	NA	NA
+chicken dark meat	chicken	poultry	animal	NA	NA	NA	NA
+horse, middle meat	horse meat	horse	meat	animal	NA	NA	NA
+curry plant	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+zucchini	squash	pepo	fleshy fruit	fruit	plant	NA	NA
+horse, fatty light meat	horse meat	horse	meat	animal	NA	NA	NA
+french radish	radish	vegetable	vegetable/herb	plant	NA	NA	NA
+escarole	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+White tea	tea	tea/infusion	vegetable/herb	plant	NA	NA	NA
+butterfish, eye	butterfish	fish_saltwater	seafood	animal	NA	NA	NA
+rolled oats	oat	grain/grass	fruit	plant	NA	NA	NA
+dill	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+black mung bean	mung bean	bean	legume	fruit	plant	NA	NA
+palm fruit	fleshy fruit	fruit	plant	NA	NA	NA	NA
+calcium hydroxide	mineral	NA	NA	NA	NA	NA	NA
+smelt, eye	smelt	fish_saltwater	seafood	animal	NA	NA	NA
+yellow cassava	cassava	vegetable	vegetable/herb	plant	NA	NA	NA
+lacinato kale	kale	vegetable	vegetable/herb	plant	NA	NA	NA
+tomme brulee cheese	cheese	dairy	animal	NA	NA	NA	NA
+cabernet sauvignon, red	red wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+manchego cheese	cheese	dairy	animal	NA	NA	NA	NA
+pumpkin	pepo	fleshy fruit	fruit	plant	NA	NA	NA
+pork chop	pork	pig	meat	animal	NA	NA	NA
+rye	grain/grass	fruit	plant	NA	NA	NA	NA
+bay leaf	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+rat skin and fur	rat	meat	animal	NA	NA	NA	NA
+purple basil	basil	herb/spice	vegetable/herb	plant	NA	NA	NA
+chicken liver	chicken	poultry	animal	NA	NA	NA	NA
+beef shank	beef meat	beef	cow	meat	animal	NA	NA
+miyaki mushroom	mushroom	fungi	NA	NA	NA	NA	NA
+grapefruit	citrus	fleshy fruit	fruit	plant	NA	NA	NA
+beef, dark red meat	beef meat	beef	cow	meat	animal	NA	NA
+bull, dark red	beef meat	beef	cow	meat	animal	NA	NA
+washed cheese	cheese	dairy	animal	NA	NA	NA	NA
+strawberry jam	strawberry	pseudocarp	fleshy fruit	fruit	plant	NA	NA
+rose wine, red	red wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+durum wheat	wheat	grain/grass	fruit	plant	NA	NA	NA
+black mission fig	fig	multifruit	fleshy fruit	fruit	plant	NA	NA
+french green	lentil	legume	fruit	plant	NA	NA	NA
+green chili pepper	chili pepper	pepper	berry	fleshy fruit	fruit	plant	NA
+fuerte avocado	avocado	berry	fleshy fruit	fruit	plant	NA	NA
+vegetable_undetermined	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+molasses	sap	plant	NA	NA	NA	NA	NA
+lemon guava	guava	berry	fleshy fruit	fruit	plant	NA	NA
+peanut butter	peanut	legume	fruit	plant	NA	NA	NA
+kumquat	citrus	fleshy fruit	fruit	plant	NA	NA	NA
+kava root	infusion	tea/infusion	vegetable/herb	plant	NA	NA	NA
+squid, mid portion meat	squid	shellfish	seafood	animal	NA	NA	NA
+milk Oolong	tea	tea/infusion	vegetable/herb	plant	NA	NA	NA
+green grape	grape	berry	fleshy fruit	fruit	plant	NA	NA
+kohlrabi	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+cardamom	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+green lentil	lentil	legume	fruit	plant	NA	NA	NA
+cream_cow	cream	dairy	animal	NA	NA	NA	NA
+tomato sauce	tomato	berry	fleshy fruit	fruit	plant	NA	NA
+wonderberry	berry	fleshy fruit	fruit	plant	NA	NA	NA
+watermelon	melon	pepo	fleshy fruit	fruit	plant	NA	NA
+durum wheat semolina	semolina	wheat	grain/grass	fruit	plant	NA	NA
+thai eggplant	eggplant	berry	fleshy fruit	fruit	plant	NA	NA
+red chili pepper	chili pepper	pepper	berry	fleshy fruit	fruit	plant	NA
+sweet potato	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+red radish greens	radish greens	vegetable	vegetable/herb	plant	NA	NA	NA
+chicken, free range	chicken	poultry	animal	NA	NA	NA	NA
+maitake mushroom	mushroom	fungi	NA	NA	NA	NA	NA
+soybean	bean	legume	fruit	plant	NA	NA	NA
+Black tea	tea	tea/infusion	vegetable/herb	plant	NA	NA	NA
+self caught fish	fish_undetermined	fish_saltwater	seafood	animal	NA	NA	NA
+lorikeet nectar	animal feed	NA	NA	NA	NA	NA	NA
+zinfindel, white	white wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+tap water	water	NA	NA	NA	NA	NA	NA
+maple syrup	sap	plant	NA	NA	NA	NA	NA
+taro	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+mineola orange	orange	citrus	fleshy fruit	fruit	plant	NA	NA
+black pepper	pepper	berry	fleshy fruit	fruit	plant	NA	NA
+purple carrot	carrot	vegetable	vegetable/herb	plant	NA	NA	NA
+white peach	peach	drupe	fleshy fruit	fruit	plant	NA	NA
+mackerel, tail	mackerel, fins	mackerel	fish_saltwater	seafood	animal	NA	NA
+bulgur wheat	wheat	grain/grass	fruit	plant	NA	NA	NA
+dill flower	flower	vegetable/herb	plant	NA	NA	NA	NA
+mackerel, gonad	mackerel, organ	mackerel	fish_saltwater	seafood	animal	NA	NA
+red lentil	lentil	legume	fruit	plant	NA	NA	NA
+Jerusalem artichoke	artichoke	flower	vegetable/herb	plant	NA	NA	NA
+macaroni	wheat	grain/grass	fruit	plant	NA	NA	NA
+bergamot	citrus	fleshy fruit	fruit	plant	NA	NA	NA
+rock fish, meat	rock fish	fish_saltwater	seafood	animal	NA	NA	NA
+blueberry	berry	fleshy fruit	fruit	plant	NA	NA	NA
+amaranth	grain/grass	fruit	plant	NA	NA	NA	NA
+kombucha	tea/infusion	vegetable/herb	plant	NA	NA	NA	NA
+winter onion	onion	vegetable	vegetable/herb	plant	NA	NA	NA
+mackerel, tail muscle	mackerel, meat	mackerel	fish_saltwater	seafood	animal	NA	NA
+kiwi	berry	fleshy fruit	fruit	plant	NA	NA	NA
+herring, vein/blood	herring	fish_saltwater	seafood	animal	NA	NA	NA
+red beet	beet	vegetable	vegetable/herb	plant	NA	NA	NA
+moriche palm	fleshy fruit	fruit	plant	NA	NA	NA	NA
+horse, white meat	horse meat	horse	meat	animal	NA	NA	NA
+bamboo shoot	bamboo	vegetable/herb	plant	NA	NA	NA	NA
+bacon	pork	pig	meat	animal	NA	NA	NA
+spinach	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+ahi tuna, meat	ahi tuna	tuna	fish_saltwater	seafood	animal	NA	NA
+white asparagus	asparagus	vegetable	vegetable/herb	plant	NA	NA	NA
+lizard arm	lizard	reptile	animal	NA	NA	NA	NA
+jack cheese	cheese	dairy	animal	NA	NA	NA	NA
+horse, dark meat	horse meat	horse	meat	animal	NA	NA	NA
+beef jerkey	beef meat	beef	cow	meat	animal	NA	NA
+timothy grass	grass	vegetable	vegetable/herb	plant	NA	NA	NA
+snail	gastropod	animal	NA	NA	NA	NA	NA
+red radish	radish	vegetable	vegetable/herb	plant	NA	NA	NA
+marchigiana lard	beef fat	beef	cow	meat	animal	NA	NA
+squid, midsection skin	squid	shellfish	seafood	animal	NA	NA	NA
+leek	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+sesame oil	sesame	grain/grass	fruit	plant	NA	NA	NA
+lime	citrus	fleshy fruit	fruit	plant	NA	NA	NA
+lemon cucumber	cucumber	pepo	fleshy fruit	fruit	plant	NA	NA
+vitamin	mineral	NA	NA	NA	NA	NA	NA
+calcium carbonate	mineral	NA	NA	NA	NA	NA	NA
+zinfindel, red	red wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+halibut	fish_saltwater	seafood	animal	NA	NA	NA	NA
+banana	berry	fleshy fruit	fruit	plant	NA	NA	NA
+mineral water	mineral	NA	NA	NA	NA	NA	NA
+chive blossom	flower	vegetable/herb	plant	NA	NA	NA	NA
+golden berry	berry	fleshy fruit	fruit	plant	NA	NA	NA
+herring, eye	herring	fish_saltwater	seafood	animal	NA	NA	NA
+red bell pepper	bell pepper	pepper	berry	fleshy fruit	fruit	plant	NA
+sarro di bufala cheese	cheese	dairy	animal	NA	NA	NA	NA
+donut peach	peach	drupe	fleshy fruit	fruit	plant	NA	NA
+butterfish, spine	butterfish	fish_saltwater	seafood	animal	NA	NA	NA
+nectarine	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+cauliflower	flower	vegetable/herb	plant	NA	NA	NA	NA
+sunflower seed	sunflower	achene	fruit	plant	NA	NA	NA
+Oolong tea	tea	tea/infusion	vegetable/herb	plant	NA	NA	NA
+romaine lettuce	lettuce	vegetable	vegetable/herb	plant	NA	NA	NA
+lizard tail	lizard	reptile	animal	NA	NA	NA	NA
+poppy seed	grain/grass	fruit	plant	NA	NA	NA	NA
+silversides, head	silversides	fish_saltwater	seafood	animal	NA	NA	NA
+white sesame seed	sesame seed	sesame	grain/grass	fruit	plant	NA	NA
+white wheat berry	wheat berry	wheat	grain/grass	fruit	plant	NA	NA
+cranberry	berry	fleshy fruit	fruit	plant	NA	NA	NA
+yellow cherry tomato	cherry tomato	tomato	berry	fleshy fruit	fruit	plant	NA
+green sea vegetable	seaweed	algae	NA	NA	NA	NA	NA
+turkey fat	turkey	poultry	animal	NA	NA	NA	NA
+anise	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+olive oil spread	olive	drupe	fleshy fruit	fruit	plant	NA	NA
+mackerel, dark fish skin	mackerel, skin	mackerel	fish_saltwater	seafood	animal	NA	NA
+pecan	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+pork red meat	pork	pig	meat	animal	NA	NA	NA
+duck breast	duck	waterfowl	poultry	animal	NA	NA	NA
+petit basque cheese	cheese	dairy	animal	NA	NA	NA	NA
+cheddar cheese	cheese	dairy	animal	NA	NA	NA	NA
+worm, night crawler	worm	invertebrate	animal	NA	NA	NA	NA
+squid, tentacle	squid	shellfish	seafood	animal	NA	NA	NA
+macadamia	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+pecorino cheese	cheese	dairy	animal	NA	NA	NA	NA
+greek basil	basil	herb/spice	vegetable/herb	plant	NA	NA	NA
+mackerel, midsection	mackerel, meat	mackerel	fish_saltwater	seafood	animal	NA	NA
+cicerchia	grain/grass	fruit	plant	NA	NA	NA	NA
+wheat beer	beer	grain_fermented	grain/grass	fruit	plant	NA	NA
+quinoa	grain/grass	fruit	plant	NA	NA	NA	NA
+black lentil	lentil	legume	fruit	plant	NA	NA	NA
+pinto bean	bean	legume	fruit	plant	NA	NA	NA
+rose	flower	vegetable/herb	plant	NA	NA	NA	NA
+horse, tough meat	horse meat	horse	meat	animal	NA	NA	NA
+trout, tail fins	trout, fins	trout	fish_freshwater	seafood	animal	NA	NA
+smoked paprika	pepper	berry	fleshy fruit	fruit	plant	NA	NA
+sockeye salmon	salmon	fish_freshwater	seafood	animal	NA	NA	NA
+smelt, fin	smelt	fish_saltwater	seafood	animal	NA	NA	NA
+cashew	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+red garlic	garlic	vegetable	vegetable/herb	plant	NA	NA	NA
+galia	melon	pepo	fleshy fruit	fruit	plant	NA	NA
+marchigiana beef	beef meat	beef	cow	meat	animal	NA	NA
+rabbit ear	rabbit	game meat	animal	NA	NA	NA	NA
+clementine	citrus	fleshy fruit	fruit	plant	NA	NA	NA
+sweet potato leaf	potato leaf	vegetable	vegetable/herb	plant	NA	NA	NA
+adzuki bean	bean	legume	fruit	plant	NA	NA	NA
+blenham apricot	apricot	drupe	fleshy fruit	fruit	plant	NA	NA
+brussel sprout	flower	vegetable/herb	plant	NA	NA	NA	NA
+green onion	onion	vegetable	vegetable/herb	plant	NA	NA	NA
+pepperonchini	pepper	berry	fleshy fruit	fruit	plant	NA	NA
+squid, organ	squid	shellfish	seafood	animal	NA	NA	NA
+pork end cut	pork	pig	meat	animal	NA	NA	NA
+horse, pink fat	horse, fat	horse	meat	animal	NA	NA	NA
+sugar	sugarcane	vegetable/herb	plant	NA	NA	NA	NA
+green bell pepper	bell pepper	pepper	berry	fleshy fruit	fruit	plant	NA
+ribs, white meat	meat_undetermined	meat	animal	NA	NA	NA	NA
+mozzarella cheese	cheese	dairy	animal	NA	NA	NA	NA
+golden flaxseed	flax seed	grain/grass	fruit	plant	NA	NA	NA
+rosemary	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+pine nut	seed	fruit	plant	NA	NA	NA	NA
+mustard greens	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+mackerel, pylo_cec	mackerel	fish_saltwater	seafood	animal	NA	NA	NA
+caper	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+herring, meat and skin	herring	fish_saltwater	seafood	animal	NA	NA	NA
+saigon cinnamon	cinnamon	herb/spice	vegetable/herb	plant	NA	NA	NA
+nasturtium leaf	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+ground bison	bison	meat	animal	NA	NA	NA	NA
+squid, flesh	squid	shellfish	seafood	animal	NA	NA	NA
+sugar plum tomatoes	tomato	berry	fleshy fruit	fruit	plant	NA	NA
+pumpkin blossom	flower	vegetable/herb	plant	NA	NA	NA	NA
+thai pepper	pepper	berry	fleshy fruit	fruit	plant	NA	NA
+vanilla bean	pod	vegetable/herb	plant	NA	NA	NA	NA
+lamb, shoulder chops	lamb	meat	animal	NA	NA	NA	NA
+blood orange	orange	citrus	fleshy fruit	fruit	plant	NA	NA
+squid, eye	squid	shellfish	seafood	animal	NA	NA	NA
+pitaya	berry	fleshy fruit	fruit	plant	NA	NA	NA
+pork cheek	pork	pig	meat	animal	NA	NA	NA
+cranberry bean	bean	legume	fruit	plant	NA	NA	NA
+giant fennel	hing powder	herb/spice	vegetable/herb	plant	NA	NA	NA
+brown flaxseed	flax seed	grain/grass	fruit	plant	NA	NA	NA
+mushroom plant	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+yerba mate	tea	tea/infusion	vegetable/herb	plant	NA	NA	NA
+Pu'er tea	tea	tea/infusion	vegetable/herb	plant	NA	NA	NA
+lima bean	bean	legume	fruit	plant	NA	NA	NA
+cacoa	berry	fleshy fruit	fruit	plant	NA	NA	NA
+blue corn	corn	grain/grass	fruit	plant	NA	NA	NA
+manzanilla olive	olive	drupe	fleshy fruit	fruit	plant	NA	NA
+thai basil	basil	herb/spice	vegetable/herb	plant	NA	NA	NA
+king oyster mushroom	mushroom	fungi	NA	NA	NA	NA	NA
+corn husk	vegetable/herb	plant	NA	NA	NA	NA	NA
+bunching onion	onion	vegetable	vegetable/herb	plant	NA	NA	NA
+yeast	fungi	NA	NA	NA	NA	NA	NA
+cricket	insect	animal	NA	NA	NA	NA	NA
+black pig	pork	pig	meat	animal	NA	NA	NA
+frisee lettuce	lettuce	vegetable	vegetable/herb	plant	NA	NA	NA
+trout, eye	trout	fish_freshwater	seafood	animal	NA	NA	NA
+grape tomato	tomato	berry	fleshy fruit	fruit	plant	NA	NA
+white bean	bean	legume	fruit	plant	NA	NA	NA
+spleen, beef	beef	cow	meat	animal	NA	NA	NA
+hazelnut	nut	fruit	plant	NA	NA	NA	NA
+pork sausage	pork	pig	meat	animal	NA	NA	NA
+hemp	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+heirloom tomato	tomato	berry	fleshy fruit	fruit	plant	NA	NA
+chuck roast	beef meat	beef	cow	meat	animal	NA	NA
+pork lard	pork fat	pig	meat	animal	NA	NA	NA
+mouse head	mouse	meat	animal	NA	NA	NA	NA
+yaki nori	nori	seaweed	algae	NA	NA	NA	NA
+milk_goat	milk	dairy	animal	NA	NA	NA	NA
+tilapia	fish_freshwater	seafood	animal	NA	NA	NA	NA
+chicken thigh	chicken	poultry	animal	NA	NA	NA	NA
+garbanzo bean	bean	legume	fruit	plant	NA	NA	NA
+spicy pepper	pepper	berry	fleshy fruit	fruit	plant	NA	NA
+wheat semolina	semolina	wheat	grain/grass	fruit	plant	NA	NA
+herring, fins	herring	fish_saltwater	seafood	animal	NA	NA	NA
+almond	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+Frederick passion fruit	passionfruit	berry	fleshy fruit	fruit	plant	NA	NA
+orange chard	chard	vegetable	vegetable/herb	plant	NA	NA	NA
+egg_quail	egg_poultry	egg	animal	NA	NA	NA	NA
+lemon grass	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+butterfish, skin	butterfish	fish_saltwater	seafood	animal	NA	NA	NA
+long grain brown rice	brown rice	rice	grain/grass	fruit	plant	NA	NA
+truffle hooked	truffle	fungi	NA	NA	NA	NA	NA
+laurel	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+herring, scales	herring, skin	herring	fish_saltwater	seafood	animal	NA	NA
+orange bell pepper	bell pepper	pepper	berry	fleshy fruit	fruit	plant	NA
+honey_clover	honey	animal	NA	NA	NA	NA	NA
+carrot greens	carrot	vegetable	vegetable/herb	plant	NA	NA	NA
+Green tea	tea	tea/infusion	vegetable/herb	plant	NA	NA	NA
+bull, fatty meat	beef meat	beef	cow	meat	animal	NA	NA
+pomelo	citrus	fleshy fruit	fruit	plant	NA	NA	NA
+kalamata	olive	drupe	fleshy fruit	fruit	plant	NA	NA
+blackberry	drupe_aggregate	fleshy fruit	fruit	plant	NA	NA	NA
+Iberico cheese	cheese	dairy	animal	NA	NA	NA	NA
+mackerel, 7iyn	mackerel	fish_saltwater	seafood	animal	NA	NA	NA
+dulse	seaweed	algae	NA	NA	NA	NA	NA
+black mulberry	mulberry	multifruit	fleshy fruit	fruit	plant	NA	NA
+mango	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+hemp seed	grain/grass	fruit	plant	NA	NA	NA	NA
+petit sirah, red	red wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+smelt, red meat	smelt, meat	smelt	fish_saltwater	seafood	animal	NA	NA
+beef short rib	beef meat	beef	cow	meat	animal	NA	NA
+cod	fish_saltwater	seafood	animal	NA	NA	NA	NA
+borage leaf	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+trout, head with eyeball	trout	fish_freshwater	seafood	animal	NA	NA	NA
+wine cheese	cheese	dairy	animal	NA	NA	NA	NA
+green pepper	pepper	berry	fleshy fruit	fruit	plant	NA	NA
+green bean	bean	legume	fruit	plant	NA	NA	NA
+smelt, face meat	smelt, meat	smelt	fish_saltwater	seafood	animal	NA	NA
+wheat bran	wheat	grain/grass	fruit	plant	NA	NA	NA
+arborio rice	rice	grain/grass	fruit	plant	NA	NA	NA
+pachino cherry tomato	cherry tomato	tomato	berry	fleshy fruit	fruit	plant	NA
+styrian golding hops	hops	vegetable	vegetable/herb	plant	NA	NA	NA
+green fennel	fennel	vegetable	vegetable/herb	plant	NA	NA	NA
+chantrelle mushroom	mushroom	fungi	NA	NA	NA	NA	NA
+cream cheese	cheese	dairy	animal	NA	NA	NA	NA
+globe artichoke	artichoke	flower	vegetable/herb	plant	NA	NA	NA
+napa cabbage	cabbage	flower	vegetable/herb	plant	NA	NA	NA
+pineapple sage	sage	herb/spice	vegetable/herb	plant	NA	NA	NA
+bonito	fish_saltwater	seafood	animal	NA	NA	NA	NA
+red guava	guava	berry	fleshy fruit	fruit	plant	NA	NA
+syrah, red	red wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+purple lettuce	lettuce	vegetable	vegetable/herb	plant	NA	NA	NA
+pinot noir, red	red wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+american cheese	cheese	dairy	animal	NA	NA	NA	NA
+nasturtium flower	flower	vegetable/herb	plant	NA	NA	NA	NA
+bull, lean	beef meat	beef	cow	meat	animal	NA	NA
+japanese eggplant	eggplant	berry	fleshy fruit	fruit	plant	NA	NA
+lemon balm	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+pole bean	bean	legume	fruit	plant	NA	NA	NA
+black orca bean	bean	legume	fruit	plant	NA	NA	NA
+rhubarb	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+utaka, meat	utaka	fish_freshwater	seafood	animal	NA	NA	NA
+licorice	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+honey_macadamia	honey	animal	NA	NA	NA	NA	NA
+mackerel, bile	mackerel	fish_saltwater	seafood	animal	NA	NA	NA
+brut, white	white wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+heirloom lettuce	lettuce	vegetable	vegetable/herb	plant	NA	NA	NA
+pepper_spice	spice	herb/spice	vegetable/herb	plant	NA	NA	NA
+mackerel, dig	mackerel	fish_saltwater	seafood	animal	NA	NA	NA
+chickpea	bean	legume	fruit	plant	NA	NA	NA
+tuna, filet	tuna	fish_saltwater	seafood	animal	NA	NA	NA
+arugula	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+mint mojito	mint	herb/spice	vegetable/herb	plant	NA	NA	NA
+red raspberry	raspberry	drupe_aggregate	fleshy fruit	fruit	plant	NA	NA
+provolone	cheese	dairy	animal	NA	NA	NA	NA
+broccoli	flower	vegetable/herb	plant	NA	NA	NA	NA
+octopus	seafood	animal	NA	NA	NA	NA	NA
+silversides, gut	silversides	fish_saltwater	seafood	animal	NA	NA	NA
+goat cheese	cheese	dairy	animal	NA	NA	NA	NA
+worm, meal worm	worm	invertebrate	animal	NA	NA	NA	NA
+soda	sugarcane	vegetable/herb	plant	NA	NA	NA	NA
+dandelion green	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+trout, pelvic fins	trout, fins	trout	fish_freshwater	seafood	animal	NA	NA
+buckwheat	wheat	grain/grass	fruit	plant	NA	NA	NA
+purple mangosteen	mangosteen	berry	fleshy fruit	fruit	plant	NA	NA
+mackerel, eyeball frame	mackerel	fish_saltwater	seafood	animal	NA	NA	NA
+egg_chicken	egg_poultry	egg	animal	NA	NA	NA	NA
+snapper, meat	snapper	fish_saltwater	seafood	animal	NA	NA	NA
+cannabis leaf	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+curly leaf lettuce	lettuce	vegetable	vegetable/herb	plant	NA	NA	NA
+mouse skin and fur	mouse	meat	animal	NA	NA	NA	NA
+persian cucumber	cucumber	pepo	fleshy fruit	fruit	plant	NA	NA
+shrimp	shellfish	seafood	animal	NA	NA	NA	NA
+filtered water	water	NA	NA	NA	NA	NA	NA
+pork white meat	pork	pig	meat	animal	NA	NA	NA
+mackerel, liver	mackerel, organ	mackerel	fish_saltwater	seafood	animal	NA	NA
+worm, red worm	worm	invertebrate	animal	NA	NA	NA	NA
+ice cream	dairy	animal	NA	NA	NA	NA	NA
+armenian cucumber	cucumber	pepo	fleshy fruit	fruit	plant	NA	NA
+red chard	chard	vegetable	vegetable/herb	plant	NA	NA	NA
+navel orange	orange	citrus	fleshy fruit	fruit	plant	NA	NA
+guada hervida	fleshy fruit	fruit	plant	NA	NA	NA	NA
+silversides, mixed meat	silversides, meat	silversides	fish_saltwater	seafood	animal	NA	NA
+jade pearl rice	rice	grain/grass	fruit	plant	NA	NA	NA
+mouse feet	mouse	meat	animal	NA	NA	NA	NA
+herring, midsection	herring, meat	herring	fish_saltwater	seafood	animal	NA	NA
+quince	pome	fleshy fruit	fruit	plant	NA	NA	NA
+lotus seed	grain/grass	fruit	plant	NA	NA	NA	NA
+lime leaf	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+pot roast	beef meat	beef	cow	meat	animal	NA	NA
+hulled millet	millet	grain/grass	fruit	plant	NA	NA	NA
+cowpea	bean	legume	fruit	plant	NA	NA	NA
+orzo	wheat	grain/grass	fruit	plant	NA	NA	NA
+spring roll	wheat	grain/grass	fruit	plant	NA	NA	NA
+midnight moon cheese	cheese	dairy	animal	NA	NA	NA	NA
+potato chip	potato	vegetable	vegetable/herb	plant	NA	NA	NA
+medjool date	date	drupe	fleshy fruit	fruit	plant	NA	NA
+herring, organ	herring	fish_saltwater	seafood	animal	NA	NA	NA
+shishito pepper	pepper	berry	fleshy fruit	fruit	plant	NA	NA
+jasmine white rice	white rice	rice	grain/grass	fruit	plant	NA	NA
+chia	grain/grass	fruit	plant	NA	NA	NA	NA
+artificial sweetener	vegetable/herb	plant	NA	NA	NA	NA	NA
+long grain white rice	white rice	rice	grain/grass	fruit	plant	NA	NA
+ripe black fine truffle	truffle black	truffle	fungi	NA	NA	NA	NA
+purple cabbage	cabbage	flower	vegetable/herb	plant	NA	NA	NA
+copohazu	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+apple_cider	apple	pome	fleshy fruit	fruit	plant	NA	NA
+egg_salmon	egg_fish	egg	animal	NA	NA	NA	NA
+turmeric	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+strawberry guava	guava	berry	fleshy fruit	fruit	plant	NA	NA
+brazil nut	seed	fruit	plant	NA	NA	NA	NA
+galangal	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+blue cheese	cheese	dairy	animal	NA	NA	NA	NA
+black olive	olive	drupe	fleshy fruit	fruit	plant	NA	NA
+barlett pear	pear	pome	fleshy fruit	fruit	plant	NA	NA
+pineapple	multifruit	fleshy fruit	fruit	plant	NA	NA	NA
+meyer lemon	lemon	citrus	fleshy fruit	fruit	plant	NA	NA
+white garlic	garlic	vegetable	vegetable/herb	plant	NA	NA	NA
+plum	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+mackerel, brain	mackerel, organ	mackerel	fish_saltwater	seafood	animal	NA	NA
+marigold	flower	vegetable/herb	plant	NA	NA	NA	NA
+parmesan cheese	cheese	dairy	animal	NA	NA	NA	NA
+yellow chard	chard	vegetable	vegetable/herb	plant	NA	NA	NA
+steak	beef meat	beef	cow	meat	animal	NA	NA
+trout, head	trout	fish_freshwater	seafood	animal	NA	NA	NA
+langostino	shellfish	seafood	animal	NA	NA	NA	NA
+mackerel, intestines	mackerel, organ	mackerel	fish_saltwater	seafood	animal	NA	NA
+yuca	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+crimini mushroom	mushroom	fungi	NA	NA	NA	NA	NA
+orange leaf	citrus leaf	vegetable/herb	plant	NA	NA	NA	NA
+premature black fine truffle	truffle black	truffle	fungi	NA	NA	NA	NA
+saurkraut	cabbage	flower	vegetable/herb	plant	NA	NA	NA
+satsuma mandarin	mandarin	citrus	fleshy fruit	fruit	plant	NA	NA
+steel-cut oats	oat	grain/grass	fruit	plant	NA	NA	NA
+roma tomato	tomato	berry	fleshy fruit	fruit	plant	NA	NA
+balsamic vinegar	grape	berry	fleshy fruit	fruit	plant	NA	NA
+worm, wax worm	worm	invertebrate	animal	NA	NA	NA	NA
+kelp	seaweed	algae	NA	NA	NA	NA	NA
+honey_sage	honey	animal	NA	NA	NA	NA	NA
+walnut	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+ground cherry	cherry	drupe	fleshy fruit	fruit	plant	NA	NA
+ricotta cheese	cheese	dairy	animal	NA	NA	NA	NA
+riesling, white	white wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+chocolate milk	milk_cow	milk	dairy	animal	NA	NA	NA
+port, red	red wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+red leaf lettuce	lettuce	vegetable	vegetable/herb	plant	NA	NA	NA
+mackerel, side muscle	mackerel, meat	mackerel	fish_saltwater	seafood	animal	NA	NA
+sardine, meat	sardine	fish_saltwater	seafood	animal	NA	NA	NA
+havarti cheese	cheese	dairy	animal	NA	NA	NA	NA
+tomatillo	berry	fleshy fruit	fruit	plant	NA	NA	NA
+sour cream	cream	dairy	animal	NA	NA	NA	NA
+d anjou pear	pear	pome	fleshy fruit	fruit	plant	NA	NA
+sungold tomato	tomato	berry	fleshy fruit	fruit	plant	NA	NA
+beef, red meat	beef meat	beef	cow	meat	animal	NA	NA
+mackerel, red	mackerel	fish_saltwater	seafood	animal	NA	NA	NA
+hass avocado	avocado	berry	fleshy fruit	fruit	plant	NA	NA
+yogurt_cow	yogurt	dairy	animal	NA	NA	NA	NA
+african blue basil	basil	herb/spice	vegetable/herb	plant	NA	NA	NA
+bottled water	water	NA	NA	NA	NA	NA	NA
+scallop	shellfish	seafood	animal	NA	NA	NA	NA
+white onion	onion	vegetable	vegetable/herb	plant	NA	NA	NA
+worm, gut loaded	worm	invertebrate	animal	NA	NA	NA	NA
+black ant	ant	insect	animal	NA	NA	NA	NA
+patty pan squash	squash	pepo	fleshy fruit	fruit	plant	NA	NA
+dubliner cheese	cheese	dairy	animal	NA	NA	NA	NA
+english pea	pea	legume	fruit	plant	NA	NA	NA
+shiitake mushroom	mushroom	fungi	NA	NA	NA	NA	NA
+butterfish, organ	butterfish	fish_saltwater	seafood	animal	NA	NA	NA
+straw mushroom	mushroom	fungi	NA	NA	NA	NA	NA
+vitamin E	supplement	NA	NA	NA	NA	NA	NA
+mackerel, stomach	mackerel, organ	mackerel	fish_saltwater	seafood	animal	NA	NA
+mashed potato	potato	vegetable	vegetable/herb	plant	NA	NA	NA
+green squash	squash	pepo	fleshy fruit	fruit	plant	NA	NA
+ale	beer	grain_fermented	grain/grass	fruit	plant	NA	NA
+feta cheese	cheese	dairy	animal	NA	NA	NA	NA
+yellow carrot	carrot	vegetable	vegetable/herb	plant	NA	NA	NA
+juniper berry	berry	fleshy fruit	fruit	plant	NA	NA	NA
+filet mignon	beef meat	beef	cow	meat	animal	NA	NA
+black bean	bean	legume	fruit	plant	NA	NA	NA
+garlic tops	garlic	vegetable	vegetable/herb	plant	NA	NA	NA
+buffalo jerkey	buffalo	game meat	animal	NA	NA	NA	NA
+honey_chestnut	honey	animal	NA	NA	NA	NA	NA
+tomato paste	tomato	berry	fleshy fruit	fruit	plant	NA	NA
+beef, pink meat	beef meat	beef	cow	meat	animal	NA	NA
+formula	milk	dairy	animal	NA	NA	NA	NA
+celery	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+veal, shoulder roast	veal	cow	meat	animal	NA	NA	NA
+plantain	berry	fleshy fruit	fruit	plant	NA	NA	NA
+european soldier bean	bean	legume	fruit	plant	NA	NA	NA
+horse, white fat	horse, fat	horse	meat	animal	NA	NA	NA
+multivitamin	mineral	NA	NA	NA	NA	NA	NA
+mouse skin	mouse	meat	animal	NA	NA	NA	NA
+mouse intestines	mouse	meat	animal	NA	NA	NA	NA
+saffron	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+sardine, fins	sardine	fish_saltwater	seafood	animal	NA	NA	NA
+mouse body	mouse	meat	animal	NA	NA	NA	NA
+tarantula	arthropod	animal	NA	NA	NA	NA	NA
+coconut	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+canola oil	canola	grain/grass	fruit	plant	NA	NA	NA
+turkey breast	turkey meat	turkey	poultry	animal	NA	NA	NA
+white carrot	carrot	vegetable	vegetable/herb	plant	NA	NA	NA
+iceberg lettuce	lettuce	vegetable	vegetable/herb	plant	NA	NA	NA
+pork shoulder	pork	pig	meat	animal	NA	NA	NA
+common bean	bean	legume	fruit	plant	NA	NA	NA
+smelt, midsection	smelt, meat	smelt	fish_saltwater	seafood	animal	NA	NA
+cloves	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+chocolate mint	mint	herb/spice	vegetable/herb	plant	NA	NA	NA
+trout, end fin	trout, fins	trout	fish_freshwater	seafood	animal	NA	NA
+zuchini blossom	squash blossom	flower	vegetable/herb	plant	NA	NA	NA
+Flavored Black tea	tea	tea/infusion	vegetable/herb	plant	NA	NA	NA
+IPA	beer	grain_fermented	grain/grass	fruit	plant	NA	NA
+sparkling water	carbonated water	mineral	NA	NA	NA	NA	NA
+trout, tail meat	trout, meat	trout	fish_freshwater	seafood	animal	NA	NA
+ostrich jerkey	ostrich	game meat	animal	NA	NA	NA	NA
+wild rice	rice	grain/grass	fruit	plant	NA	NA	NA
+boschetto cheese	cheese	dairy	animal	NA	NA	NA	NA
+chive stem	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+herring, mixed meat	herring, meat	herring	fish_saltwater	seafood	animal	NA	NA
+nori seaweed	nori	seaweed	algae	NA	NA	NA	NA
+yellow squash	squash	pepo	fleshy fruit	fruit	plant	NA	NA
+nutmeg	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+pink himalayan salt	salt	mineral	NA	NA	NA	NA	NA
+coffee	berry	fleshy fruit	fruit	plant	NA	NA	NA
+cassis	berry	fleshy fruit	fruit	plant	NA	NA	NA
+butter	dairy	animal	NA	NA	NA	NA	NA
+heart, beef	beef	cow	meat	animal	NA	NA	NA
+green mung bean	mung bean	bean	legume	fruit	plant	NA	NA
+sardine, eye	sardine	fish_saltwater	seafood	animal	NA	NA	NA
+cassava flour	cassava	vegetable	vegetable/herb	plant	NA	NA	NA
+beer mash	grain/grass	fruit	plant	NA	NA	NA	NA
+butterfish, fin	butterfish	fish_saltwater	seafood	animal	NA	NA	NA
+bloomy cheese	cheese	dairy	animal	NA	NA	NA	NA
+acai	berry	fleshy fruit	fruit	plant	NA	NA	NA
+marjoram	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+crystal hops	hops	vegetable	vegetable/herb	plant	NA	NA	NA
+red sea vegetable	seaweed	algae	NA	NA	NA	NA	NA
+tarragon	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
+asian pear	pear	pome	fleshy fruit	fruit	plant	NA	NA
+raclette cheese	cheese	dairy	animal	NA	NA	NA	NA
+turkish fig	fig	multifruit	fleshy fruit	fruit	plant	NA	NA
+cocoa seed	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+cactus	vegetable/herb	plant	NA	NA	NA	NA	NA
+elk loin	elk	game meat	animal	NA	NA	NA	NA
+mouse tail	mouse	meat	animal	NA	NA	NA	NA
+jalapeno pepper	pepper	berry	fleshy fruit	fruit	plant	NA	NA
+barley	grain/grass	fruit	plant	NA	NA	NA	NA
+Rooibos	infusion	tea/infusion	vegetable/herb	plant	NA	NA	NA
+watercress	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+agave sap	agave	vegetable	vegetable/herb	plant	NA	NA	NA
+worm, giant meal worm	worm	invertebrate	animal	NA	NA	NA	NA
+honeydew melon	melon	pepo	fleshy fruit	fruit	plant	NA	NA
+green cabbage	cabbage	flower	vegetable/herb	plant	NA	NA	NA
+churro	wheat	grain/grass	fruit	plant	NA	NA	NA
+mackerel, heart	mackerel, organ	mackerel	fish_saltwater	seafood	animal	NA	NA
+hearts of palm	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+Chlamydomonas reinhardtii	algae	NA	NA	NA	NA	NA	NA
+pig back	pork	pig	meat	animal	NA	NA	NA
+oyster mushroom	mushroom	fungi	NA	NA	NA	NA	NA
+pistachio	drupe	fleshy fruit	fruit	plant	NA	NA	NA
+corn flour	corn	grain/grass	fruit	plant	NA	NA	NA
+beef, white meat	beef meat	beef	cow	meat	animal	NA	NA
+white mushroom	mushroom	fungi	NA	NA	NA	NA	NA
+bony fish	fish_saltwater	seafood	animal	NA	NA	NA	NA
+roxanthin	supplement	NA	NA	NA	NA	NA	NA
+fuyu persimmon	persimmon	berry	fleshy fruit	fruit	plant	NA	NA
+horse, red meat with fat	horse, red meat	horse meat	horse	meat	animal	NA	NA
+trout, skin	trout	fish_freshwater	seafood	animal	NA	NA	NA
+brown sea vegetable	seaweed	algae	NA	NA	NA	NA	NA
+curly parsley	parsley	herb/spice	vegetable/herb	plant	NA	NA	NA
+butterfish, midsection	butterfish, meat	butterfish	fish_saltwater	seafood	animal	NA	NA
+orange carrot	carrot	vegetable	vegetable/herb	plant	NA	NA	NA
+gouda cheese	cheese	dairy	animal	NA	NA	NA	NA
+betel nut leaf	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+beef, white fat	beef fat	beef	cow	meat	animal	NA	NA
+string cheese	cheese	dairy	animal	NA	NA	NA	NA
+lamb, top round	lamb	meat	animal	NA	NA	NA	NA
+trout, center meat	trout, meat	trout	fish_freshwater	seafood	animal	NA	NA
+betel nut	berry	fleshy fruit	fruit	plant	NA	NA	NA
+turkey inner meat	turkey meat	turkey	poultry	animal	NA	NA	NA
+green curly baby romaine	lettuce	vegetable	vegetable/herb	plant	NA	NA	NA
+borage flower	flower	vegetable/herb	plant	NA	NA	NA	NA
+papaya	berry	fleshy fruit	fruit	plant	NA	NA	NA
+red onion	onion	vegetable	vegetable/herb	plant	NA	NA	NA
+butter leaf lettuce	lettuce	vegetable	vegetable/herb	plant	NA	NA	NA
+beef, midsection dark meat	beef meat	beef	cow	meat	animal	NA	NA
+mackerel, white skin	mackerel, skin	mackerel	fish_saltwater	seafood	animal	NA	NA
+bok choy	vegetable	vegetable/herb	plant	NA	NA	NA	NA
+grasshopper	insect	animal	NA	NA	NA	NA	NA
+mackerel, gill	mackerel	fish_saltwater	seafood	animal	NA	NA	NA
+bull, normal	beef meat	beef	cow	meat	animal	NA	NA
+pearled farro	farro	wheat	grain/grass	fruit	plant	NA	NA
+smelt, white meat	smelt, meat	smelt	fish_saltwater	seafood	animal	NA	NA
+horse, pink meat	horse meat	horse	meat	animal	NA	NA	NA
+cocura	fleshy fruit	fruit	plant	NA	NA	NA	NA
+lapacho bark	infusion	tea/infusion	vegetable/herb	plant	NA	NA	NA
+merlot, red	red wine	grape_fermented	grape	berry	fleshy fruit	fruit	plant
+lavender	flower	vegetable/herb	plant	NA	NA	NA	NA
+oregano	herb/spice	vegetable/herb	plant	NA	NA	NA	NA
