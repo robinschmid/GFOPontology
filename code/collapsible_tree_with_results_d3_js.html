@@ -67,26 +67,13 @@
     var treemap = d3.tree().size([height, width]);
 
     // load the external data
-    d3.json(gfopOntologyFile, function (error, json) {
+    d3.json(gfopOntologyFile, function (error, ontology_json) {
         if (error) return console.warn(error);
-        console.log(json);
-
         // read masst results and reflect to nodes
-        readMasstResults(masstResultsFile, json);
-
-        root = d3.hierarchy(json, function (d) {
-            return d.children;
-        });
-        root.x0 = height / 2;
-        root.y0 = 0;
-
-        // Collapse after the second level
-        root.children.forEach(collapse);
-
-        console.log("Children:" + root.children);
-        update(root);
+        readMasstResults(masstResultsFile, ontology_json);
     });
 
+    // read masst results and add to tree
     function readMasstResults(fileOrUrl, ontology_json) {
         // read results from food MASST tsv (tab-separated)
         d3.tsv(fileOrUrl, function (d) {
@@ -101,33 +88,45 @@
         }, function (error, rows) {
             if (error) return console.warn(error);
 
-            console.log(rows);
-
             console.log("Applying results to nodes");
             // add data to nodes
             applyMasstResults(ontology_json, rows);
+
+            // create data hierarchy
+            root = d3.hierarchy(ontology_json, function (d) {
+                return d.children;
+            });
+            root.x0 = height / 2;
+            root.y0 = 0;
+
+            // Collapse after the second level
+            // root.children.forEach(collapseNoMatch);
+            applyToAllNodes(root, collapseNoMatch);
+            update(root);
         });
     }
 
-    function applyMasstResultsChildren(node, results) {
-        var group_size_sum = 0;
-        var matched_size_sum = 0;
-        var occurrence_fraction_sum = 0.0;
-
-        console.log("My node is  :" + node + "  " + node.name);
-
-        if (node.children) {
-            console.log("Check children")
-            for (child in node.children) {
-                const values = applyMasstResults(node.children[child], results);
-                group_size_sum += values[0];
-                matched_size_sum += values[1];
-                occurrence_fraction_sum += values[2];
+    /**
+     * loop over all children and apply callback to all children
+     * @param parentNode parent node will call
+     * @param callback a funtion that is applied to parentNode and all children
+     */
+    function applyToAllNodes(parentNode, callback) {
+        callback(parentNode)
+        let child;
+        if (parentNode.children) {
+            for (child of parentNode.children) {
+                applyToAllNodes(child, callback);
             }
         }
-        return [group_size_sum, matched_size_sum, occurrence_fraction_sum];
+        if (parentNode._children) {
+            for (child of parentNode._children) {
+                applyToAllNodes(child, callback);
+            }
+        }
     }
 
+    // apply results to all nodes
     function applyMasstResults(node, results) {
         // parse: group_size	group_value matched_size	metadata_column	occurrence_fraction
         // sum results for all children (collapsed and non collapsed)
@@ -144,7 +143,6 @@
         // find match in results for this node and add to values
         const found = results.find(row => row.group_value === node.name)
         if (found) {
-            console.log("Found one: " + found)
             group_size_sum += found.group_size
             matched_size_sum += found.matched_size
             occurrence_fraction_sum += found.occurrence_fraction
@@ -153,15 +151,28 @@
         node.group_size = group_size_sum
         node.matched_size = matched_size_sum
         node.occurrence_fraction = occurrence_fraction_sum
-        // show node if matched
-        if (matched_size_sum > 0) {
-            console.log("Show")
-            show(node);
+
+        return [group_size_sum, matched_size_sum, occurrence_fraction_sum];
+    }
+
+    // apply to all children
+    function applyMasstResultsChildren(node, results) {
+        var group_size_sum = 0;
+        var matched_size_sum = 0;
+        var occurrence_fraction_sum = 0.0;
+
+        if (node.children) {
+            for (child of node.children) {
+                const values = applyMasstResults(child, results);
+                group_size_sum += values[0];
+                matched_size_sum += values[1];
+                occurrence_fraction_sum += values[2];
+            }
         }
         return [group_size_sum, matched_size_sum, occurrence_fraction_sum];
     }
 
-    // add tooltip div
+    // add tooltip div and set to invisible for now
     var div = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
@@ -175,6 +186,39 @@
             d._children = d.children
             d._children.forEach(collapse)
             d.children = null
+        }
+    }
+
+    /**
+     * Collapse the node and all it's children
+     * @param node a node and its children
+     * @param predicate a function to define if nodes should be collapsed (true) or shown (false). predicate should
+     * take a node
+     */
+    function collapseif(node, predicate) {
+        if (predicate(node)) {
+            console.log("collapse " + node.data.name)
+            collapse(node)
+        } else {
+            console.log("Show " + node.data.name)
+            show(node)
+            node.children.forEach(child => collapseif(child, predicate))
+        }
+    }
+
+    /**
+     * Collapse the node and all it's children
+     * @param node a node and its children
+     * @param predicate a function to define if nodes should be collapsed (true) or shown (false). predicate should
+     * take a node
+     */
+    function collapseNoMatch(node) {
+        if (hasNoMatches(node)) {
+            console.log("collapse " + node.toString())
+            collapse(node)
+        } else {
+            console.log("Show " + node.toString())
+            show(node)
         }
     }
 
@@ -283,7 +327,7 @@
         nodeUpdate.select('circle.node')
             .attr('r', function (d) {
                 // set the radius if matches larger : otherwise default to X
-                return d.data.matched_size > 0 ? Math.min(5+d.data.matched_size, 20) : 5;
+                return d.data.matched_size > 0 ? Math.min(5 + d.data.matched_size, 20) : 5;
             })
             .style("fill", function (d) {
                 // set fill color depending on matches and children
@@ -381,6 +425,16 @@
             }
             update(d);
         }
+    }
+
+    // true if node has group_size>0 (matches)
+    function hasMatches(node) {
+        return node.data.matched_size > 0;
+    }
+
+    // true if node has group_size>0 (matches)
+    function hasNoMatches(node) {
+        return !hasMatches(node);
     }
 
 </script>
