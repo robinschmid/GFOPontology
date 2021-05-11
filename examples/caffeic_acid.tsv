@@ -1,0 +1,814 @@
+group_size	group_value	matched_size	metadata_column	occurrence_fraction
+1	white carrot	1	ontology_term	1.0
+1	tomato paste	1	ontology_term	1.0
+1	sugar plum tomatoes	1	ontology_term	1.0
+1	purple basil	1	ontology_term	1.0
+1	petit sirah, red	1	ontology_term	1.0
+1	lemon grass	1	ontology_term	1.0
+1	lemon balm	1	ontology_term	1.0
+1	green tomato	1	ontology_term	1.0
+1	greek basil	1	ontology_term	1.0
+1	grape tomato	1	ontology_term	1.0
+1	borage flower	1	ontology_term	1.0
+5	cabernet sauvignon, red	3	ontology_term	0.6
+4	sage	2	ontology_term	0.5
+4	artichoke	2	ontology_term	0.5
+2	port, red	1	ontology_term	0.5
+2	green pepper	1	ontology_term	0.5
+2	garlic powder	1	ontology_term	0.5
+2	chocolate mint	1	ontology_term	0.5
+2	carrot greens	1	ontology_term	0.5
+3	sunflower seed	1	ontology_term	0.3333333333333333
+3	sunflower	1	ontology_term	0.3333333333333333
+3	achene	1	ontology_term	0.3333333333333333
+17	red wine	5	ontology_term	0.29411764705882354
+117	apple_cider	30	ontology_term	0.2564102564102564
+8	basil	2	ontology_term	0.25
+4	blackberry	1	ontology_term	0.25
+23	grape_fermented	5	ontology_term	0.21739130434782608
+143	apple	30	ontology_term	0.2097902097902098
+5	mint	1	ontology_term	0.2
+155	pome	30	ontology_term	0.1935483870967742
+26	carrot	5	ontology_term	0.19230769230769232
+118	cherry tomato	22	ontology_term	0.1864406779661017
+11	drupe_aggregate	2	ontology_term	0.18181818181818182
+148	tomato	26	ontology_term	0.17567567567567569
+6	sweet potato	1	ontology_term	0.16666666666666666
+6	red raspberry	1	ontology_term	0.16666666666666666
+13	blueberry	2	ontology_term	0.15384615384615385
+7	raspberry	1	ontology_term	0.14285714285714285
+46	grape	6	ontology_term	0.13043478260869565
+8	cherry	1	ontology_term	0.125
+9	rosemary	1	ontology_term	0.1111111111111111
+10	avocado	1	ontology_term	0.1
+81	herb/spice	8	ontology_term	0.09876543209876543
+861	fleshy fruit	75	ontology_term	0.08710801393728224
+472	berry	41	ontology_term	0.08686440677966102
+37	flower	3	ontology_term	0.08108108108108109
+15	potato	1	ontology_term	0.06666666666666667
+1273	fruit	81	ontology_term	0.0636292223095051
+2121	plant	104	ontology_term	0.04903347477604903
+180	vegetable	8	ontology_term	0.044444444444444446
+597	vegetable/herb	20	ontology_term	0.03350083752093802
+160	coffee	5	ontology_term	0.03125
+37	pepper	1	ontology_term	0.02702702702702703
+70	drupe	1	ontology_term	0.014285714285714285
+231	grain/grass	2	ontology_term	0.008658008658008658
+523	complex	2	ontology_term	0.0038240917782026767
+9	quinoa	0	ontology_term	0.0
+9	pecorino cheese	0	ontology_term	0.0
+9	melon	0	ontology_term	0.0
+9	mackerel, organ	0	ontology_term	0.0
+9	bloomy cheese	0	ontology_term	0.0
+9	bell pepper	0	ontology_term	0.0
+8	worm	0	ontology_term	0.0
+8	white rice	0	ontology_term	0.0
+8	supplement	0	ontology_term	0.0
+8	smelt	0	ontology_term	0.0
+8	salmon	0	ontology_term	0.0
+8	invertebrate	0	ontology_term	0.0
+8	gouda cheese	0	ontology_term	0.0
+8	durum wheat	0	ontology_term	0.0
+8	coconut	0	ontology_term	0.0
+8	cashew	0	ontology_term	0.0
+8	brown rice	0	ontology_term	0.0
+8	beet	0	ontology_term	0.0
+8	banana	0	ontology_term	0.0
+8	almond	0	ontology_term	0.0
+836	animal	0	ontology_term	0.0
+7	trout, meat	0	ontology_term	0.0
+7	trout, fins	0	ontology_term	0.0
+7	squid	0	ontology_term	0.0
+7	not provided	0	ontology_term	0.0
+7	mandarin	0	ontology_term	0.0
+7	manchego cheese	0	ontology_term	0.0
+7	insect	0	ontology_term	0.0
+7	green grape	0	ontology_term	0.0
+7	garlic	0	ontology_term	0.0
+7	cream cheese	0	ontology_term	0.0
+7	carbonated water	0	ontology_term	0.0
+7	butterfish	0	ontology_term	0.0
+7	butter	0	ontology_term	0.0
+7	blue cheese	0	ontology_term	0.0
+75	fish_saltwater	0	ontology_term	0.0
+75	bean	0	ontology_term	0.0
+73	turkey	0	ontology_term	0.0
+71	citrus	0	ontology_term	0.0
+6	yeast	0	ontology_term	0.0
+6	white wine	0	ontology_term	0.0
+6	waterfowl	0	ontology_term	0.0
+6	squash	0	ontology_term	0.0
+6	sesame	0	ontology_term	0.0
+6	self caught fish	0	ontology_term	0.0
+6	seed	0	ontology_term	0.0
+6	salt	0	ontology_term	0.0
+6	navel orange	0	ontology_term	0.0
+6	lamb	0	ontology_term	0.0
+6	goat cheese	0	ontology_term	0.0
+6	game meat	0	ontology_term	0.0
+6	fish_undetermined	0	ontology_term	0.0
+6	duck	0	ontology_term	0.0
+6	corn husk	0	ontology_term	0.0
+6	chard	0	ontology_term	0.0
+6	celery	0	ontology_term	0.0
+5	white onion	0	ontology_term	0.0
+5	white mushroom	0	ontology_term	0.0
+5	walnut	0	ontology_term	0.0
+5	steak	0	ontology_term	0.0
+5	sparkling water	0	ontology_term	0.0
+5	red lentil	0	ontology_term	0.0
+5	pork fat	0	ontology_term	0.0
+5	plantain	0	ontology_term	0.0
+5	pine nut	0	ontology_term	0.0
+5	pea	0	ontology_term	0.0
+5	parmesan cheese	0	ontology_term	0.0
+5	oregano	0	ontology_term	0.0
+5	marchigiana beef	0	ontology_term	0.0
+5	kumquat	0	ontology_term	0.0
+5	kale	0	ontology_term	0.0
+5	jack cheese	0	ontology_term	0.0
+5	fig	0	ontology_term	0.0
+5	eggplant	0	ontology_term	0.0
+5	cream_cow	0	ontology_term	0.0
+5	chickpea	0	ontology_term	0.0
+5	chia	0	ontology_term	0.0
+5	broccoli	0	ontology_term	0.0
+5	black bean	0	ontology_term	0.0
+5	apricot	0	ontology_term	0.0
+4	veal, shoulder roast	0	ontology_term	0.0
+4	veal	0	ontology_term	0.0
+4	turkey meat	0	ontology_term	0.0
+4	trout, skin	0	ontology_term	0.0
+4	trout, eye	0	ontology_term	0.0
+4	spleen, beef	0	ontology_term	0.0
+4	spinach	0	ontology_term	0.0
+4	smelt, meat	0	ontology_term	0.0
+4	silversides	0	ontology_term	0.0
+4	shrimp	0	ontology_term	0.0
+4	sesame seed	0	ontology_term	0.0
+4	semolina	0	ontology_term	0.0
+4	sap	0	ontology_term	0.0
+4	salami	0	ontology_term	0.0
+4	rolled oats	0	ontology_term	0.0
+4	reptile	0	ontology_term	0.0
+4	red bell pepper	0	ontology_term	0.0
+4	radish	0	ontology_term	0.0
+4	pork shoulder	0	ontology_term	0.0
+4	pineapple	0	ontology_term	0.0
+4	parsley	0	ontology_term	0.0
+4	not collected	0	ontology_term	0.0
+4	milk_goat	0	ontology_term	0.0
+4	mango	0	ontology_term	0.0
+4	lizard	0	ontology_term	0.0
+4	lime	0	ontology_term	0.0
+4	lamb, shoulder chops	0	ontology_term	0.0
+4	iceberg lettuce	0	ontology_term	0.0
+4	havarti cheese	0	ontology_term	0.0
+4	guava	0	ontology_term	0.0
+4	green bean	0	ontology_term	0.0
+4	ginger	0	ontology_term	0.0
+4	cranberry	0	ontology_term	0.0
+4	cilantro	0	ontology_term	0.0
+4	cantelope melon	0	ontology_term	0.0
+4	betel nut leaf	0	ontology_term	0.0
+4	betel nut	0	ontology_term	0.0
+4	beef fat	0	ontology_term	0.0
+4	barlett pear	0	ontology_term	0.0
+4	arugula	0	ontology_term	0.0
+4	artificial sweetener	0	ontology_term	0.0
+46	Green tea	0	ontology_term	0.0
+44	milk	0	ontology_term	0.0
+42	pig	0	ontology_term	0.0
+41	wheat	0	ontology_term	0.0
+41	Black tea	0	ontology_term	0.0
+3	zucchini	0	ontology_term	0.0
+3	truffle	0	ontology_term	0.0
+3	thyme	0	ontology_term	0.0
+3	shishito pepper	0	ontology_term	0.0
+3	shiitake mushroom	0	ontology_term	0.0
+3	scallop	0	ontology_term	0.0
+3	satsuma mandarin	0	ontology_term	0.0
+3	sardine	0	ontology_term	0.0
+3	red leaf lettuce	0	ontology_term	0.0
+3	red chili pepper	0	ontology_term	0.0
+3	raclette cheese	0	ontology_term	0.0
+3	pork lard	0	ontology_term	0.0
+3	pomelo	0	ontology_term	0.0
+3	plum	0	ontology_term	0.0
+3	peach	0	ontology_term	0.0
+3	passionfruit	0	ontology_term	0.0
+3	papaya	0	ontology_term	0.0
+3	mung bean	0	ontology_term	0.0
+3	mouse tail	0	ontology_term	0.0
+3	mouse feet	0	ontology_term	0.0
+3	meyer lemon	0	ontology_term	0.0
+3	meat_undetermined	0	ontology_term	0.0
+3	maple syrup	0	ontology_term	0.0
+3	mackerel, skin	0	ontology_term	0.0
+3	mackerel, meat	0	ontology_term	0.0
+3	jalapeno pepper	0	ontology_term	0.0
+3	infusion	0	ontology_term	0.0
+3	ice cream	0	ontology_term	0.0
+3	horse, white meat	0	ontology_term	0.0
+3	horse, red meat	0	ontology_term	0.0
+3	horse, fat	0	ontology_term	0.0
+3	green onion	0	ontology_term	0.0
+3	green chili pepper	0	ontology_term	0.0
+3	green bell pepper	0	ontology_term	0.0
+3	grasshopper	0	ontology_term	0.0
+3	garbanzo bean	0	ontology_term	0.0
+3	formula	0	ontology_term	0.0
+3	fava bean	0	ontology_term	0.0
+3	farro	0	ontology_term	0.0
+3	duck breast	0	ontology_term	0.0
+3	chicken thigh	0	ontology_term	0.0
+3	cauliflower	0	ontology_term	0.0
+3	bulgur wheat	0	ontology_term	0.0
+3	brussel sprout	0	ontology_term	0.0
+3	bok choy	0	ontology_term	0.0
+3	barley	0	ontology_term	0.0
+3	bacon	0	ontology_term	0.0
+3	asparagus	0	ontology_term	0.0
+3	anchovy	0	ontology_term	0.0
+37	rice	0	ontology_term	0.0
+37	pork	0	ontology_term	0.0
+37	fish_freshwater	0	ontology_term	0.0
+36	milk_cow	0	ontology_term	0.0
+35	Oolong tea	0	ontology_term	0.0
+34	pepo	0	ontology_term	0.0
+34	kombucha	0	ontology_term	0.0
+33	White tea	0	ontology_term	0.0
+318	dairy	0	ontology_term	0.0
+30	fungi	0	ontology_term	0.0
+30	beef meat	0	ontology_term	0.0
+2	yuca	0	ontology_term	0.0
+2	yerba mate	0	ontology_term	0.0
+2	worm, gut loaded	0	ontology_term	0.0
+2	wild rice	0	ontology_term	0.0
+2	white peach	0	ontology_term	0.0
+2	wheat berry	0	ontology_term	0.0
+2	wheat beer	0	ontology_term	0.0
+2	watermelon	0	ontology_term	0.0
+2	vitamin E	0	ontology_term	0.0
+2	tuna	0	ontology_term	0.0
+2	truffle black	0	ontology_term	0.0
+2	tilapia	0	ontology_term	0.0
+2	tap water	0	ontology_term	0.0
+2	sweet corn	0	ontology_term	0.0
+2	string cheese	0	ontology_term	0.0
+2	strawberry guava	0	ontology_term	0.0
+2	stilton cheese	0	ontology_term	0.0
+2	squid, tentacle	0	ontology_term	0.0
+2	sour cream	0	ontology_term	0.0
+2	smoked paprika	0	ontology_term	0.0
+2	smelt, eye	0	ontology_term	0.0
+2	silversides, meat	0	ontology_term	0.0
+2	short grain brown rice	0	ontology_term	0.0
+2	sarro di bufala cheese	0	ontology_term	0.0
+2	saffron	0	ontology_term	0.0
+2	romaine lettuce	0	ontology_term	0.0
+2	red radish	0	ontology_term	0.0
+2	red onion	0	ontology_term	0.0
+2	red grape	0	ontology_term	0.0
+2	red cherry tomato	0	ontology_term	0.0
+2	red chard	0	ontology_term	0.0
+2	red beet	0	ontology_term	0.0
+2	purple lettuce	0	ontology_term	0.0
+2	poppy seed	0	ontology_term	0.0
+2	pomegranate	0	ontology_term	0.0
+2	pinto bean	0	ontology_term	0.0
+2	pinot noir, red	0	ontology_term	0.0
+2	persimmon	0	ontology_term	0.0
+2	oyster mushroom	0	ontology_term	0.0
+2	ostrich jerkey	0	ontology_term	0.0
+2	ostrich	0	ontology_term	0.0
+2	orange bell pepper	0	ontology_term	0.0
+2	nutmeg	0	ontology_term	0.0
+2	nut	0	ontology_term	0.0
+2	nori	0	ontology_term	0.0
+2	nasturtium flower	0	ontology_term	0.0
+2	napa cabbage	0	ontology_term	0.0
+2	mustard	0	ontology_term	0.0
+2	mozzarella cheese	0	ontology_term	0.0
+2	mouse head	0	ontology_term	0.0
+2	mineola orange	0	ontology_term	0.0
+2	merlot, red	0	ontology_term	0.0
+2	marchigiana lard	0	ontology_term	0.0
+2	mackerel, gonad	0	ontology_term	0.0
+2	mackerel, fins	0	ontology_term	0.0
+2	long grain white rice	0	ontology_term	0.0
+2	long grain brown rice	0	ontology_term	0.0
+2	lavender	0	ontology_term	0.0
+2	langostino	0	ontology_term	0.0
+2	kiwi	0	ontology_term	0.0
+2	king oyster mushroom	0	ontology_term	0.0
+2	kelp	0	ontology_term	0.0
+2	juniper berry	0	ontology_term	0.0
+2	jicama	0	ontology_term	0.0
+2	jasmine white rice	0	ontology_term	0.0
+2	IPA	0	ontology_term	0.0
+2	hops	0	ontology_term	0.0
+2	honeydew melon	0	ontology_term	0.0
+2	honey_clover	0	ontology_term	0.0
+2	herring, skin	0	ontology_term	0.0
+2	herring, meat	0	ontology_term	0.0
+2	herring, eye	0	ontology_term	0.0
+2	hemp seed	0	ontology_term	0.0
+2	hearts of palm	0	ontology_term	0.0
+2	heart, beef	0	ontology_term	0.0
+2	hazelnut	0	ontology_term	0.0
+2	ground cherry	0	ontology_term	0.0
+2	green olive	0	ontology_term	0.0
+2	fuyu persimmon	0	ontology_term	0.0
+2	forbidden rice	0	ontology_term	0.0
+2	flax seed	0	ontology_term	0.0
+2	feta cheese	0	ontology_term	0.0
+2	egg_quail	0	ontology_term	0.0
+2	durum wheat semolina	0	ontology_term	0.0
+2	dragonfruit	0	ontology_term	0.0
+2	dill	0	ontology_term	0.0
+2	curly leaf lettuce	0	ontology_term	0.0
+2	cricket	0	ontology_term	0.0
+2	cocoa seed	0	ontology_term	0.0
+2	clementine	0	ontology_term	0.0
+2	cinnamon	0	ontology_term	0.0
+2	cicerchia	0	ontology_term	0.0
+2	chuck roast	0	ontology_term	0.0
+2	cassava	0	ontology_term	0.0
+2	cardamom	0	ontology_term	0.0
+2	canola oil	0	ontology_term	0.0
+2	canola	0	ontology_term	0.0
+2	cactus	0	ontology_term	0.0
+2	butterfish, meat	0	ontology_term	0.0
+2	buffalo jerkey	0	ontology_term	0.0
+2	buffalo	0	ontology_term	0.0
+2	buckwheat	0	ontology_term	0.0
+2	brut, white	0	ontology_term	0.0
+2	brie cheese	0	ontology_term	0.0
+2	blood orange	0	ontology_term	0.0
+2	beef shank	0	ontology_term	0.0
+2	beef jerkey	0	ontology_term	0.0
+2	beef, dark red meat	0	ontology_term	0.0
+2	amaranth	0	ontology_term	0.0
+2	ale	0	ontology_term	0.0
+2	agave sap	0	ontology_term	0.0
+2	agave	0	ontology_term	0.0
+2	adzuki bean	0	ontology_term	0.0
+29	Pu'er tea	0	ontology_term	0.0
+26	chicken	0	ontology_term	0.0
+25	trout	0	ontology_term	0.0
+25	mackerel	0	ontology_term	0.0
+256	tea/infusion	0	ontology_term	0.0
+24	egg	0	ontology_term	0.0
+23	lettuce	0	ontology_term	0.0
+23	egg_poultry	0	ontology_term	0.0
+22	sugarcane	0	ontology_term	0.0
+22	orange	0	ontology_term	0.0
+22	Matcha tea	0	ontology_term	0.0
+22	corn	0	ontology_term	0.0
+21	mushroom	0	ontology_term	0.0
+21	mineral	0	ontology_term	0.0
+21	horse	0	ontology_term	0.0
+218	tea	0	ontology_term	0.0
+211	meat	0	ontology_term	0.0
+20	grain_fermented	0	ontology_term	0.0
+1	zuchini blossom	0	ontology_term	0.0
+1	zinfindel, white	0	ontology_term	0.0
+1	zinfindel, red	0	ontology_term	0.0
+1	young sweet corn	0	ontology_term	0.0
+1	yellow squash	0	ontology_term	0.0
+1	yellow cherry tomato	0	ontology_term	0.0
+1	yellow chard	0	ontology_term	0.0
+1	yellow cassava	0	ontology_term	0.0
+1	yellow carrot	0	ontology_term	0.0
+1	yaki nori	0	ontology_term	0.0
+1	worm, wax worm	0	ontology_term	0.0
+1	worm, red worm	0	ontology_term	0.0
+1	worm, night crawler	0	ontology_term	0.0
+1	worm, meal worm	0	ontology_term	0.0
+1	worm, giant meal worm	0	ontology_term	0.0
+1	wonderberry	0	ontology_term	0.0
+1	winter onion	0	ontology_term	0.0
+1	wine cheese	0	ontology_term	0.0
+1	white wheat berry	0	ontology_term	0.0
+1	white sesame seed	0	ontology_term	0.0
+1	white garlic	0	ontology_term	0.0
+1	white bean	0	ontology_term	0.0
+1	white asparagus	0	ontology_term	0.0
+1	wheat semolina	0	ontology_term	0.0
+1	wheat bran	0	ontology_term	0.0
+1	watercress	0	ontology_term	0.0
+1	vitamin E thiamine	0	ontology_term	0.0
+1	vitamin	0	ontology_term	0.0
+1	vegetable_undetermined	0	ontology_term	0.0
+1	vanilla bean	0	ontology_term	0.0
+1	utaka, meat	0	ontology_term	0.0
+1	utaka	0	ontology_term	0.0
+1	turmeric	0	ontology_term	0.0
+1	turkish fig	0	ontology_term	0.0
+1	turkey outer surface	0	ontology_term	0.0
+1	turkey inner meat	0	ontology_term	0.0
+1	turkey fat	0	ontology_term	0.0
+1	turkey dark meat	0	ontology_term	0.0
+1	turkey breast	0	ontology_term	0.0
+1	tupiro	0	ontology_term	0.0
+1	tuna, filet	0	ontology_term	0.0
+1	truffle hooked	0	ontology_term	0.0
+1	trout, tail meat	0	ontology_term	0.0
+1	trout, tail fins	0	ontology_term	0.0
+1	trout, pelvic fins	0	ontology_term	0.0
+1	trout, head with eyeball	0	ontology_term	0.0
+1	trout, head	0	ontology_term	0.0
+1	trout, end fin	0	ontology_term	0.0
+1	trout, center meat	0	ontology_term	0.0
+1	tomme brulee cheese	0	ontology_term	0.0
+1	tomato sauce	0	ontology_term	0.0
+1	tomatillo	0	ontology_term	0.0
+1	timothy grass	0	ontology_term	0.0
+1	thai pepper	0	ontology_term	0.0
+1	thai eggplant	0	ontology_term	0.0
+1	thai basil	0	ontology_term	0.0
+1	tarragon	0	ontology_term	0.0
+1	taro	0	ontology_term	0.0
+1	tarantula	0	ontology_term	0.0
+1	syrah, red	0	ontology_term	0.0
+1	sweet potato leaf	0	ontology_term	0.0
+1	sungold tomato	0	ontology_term	0.0
+1	sunchoke	0	ontology_term	0.0
+1	sumac	0	ontology_term	0.0
+1	sugar	0	ontology_term	0.0
+1	styrian golding hops	0	ontology_term	0.0
+1	straw mushroom	0	ontology_term	0.0
+1	strawberry jam	0	ontology_term	0.0
+1	steel-cut oats	0	ontology_term	0.0
+1	squid, organ	0	ontology_term	0.0
+1	squid, midsection skin	0	ontology_term	0.0
+1	squid, mid portion meat	0	ontology_term	0.0
+1	squid, flesh	0	ontology_term	0.0
+1	squid, eye	0	ontology_term	0.0
+1	squash blossom	0	ontology_term	0.0
+1	spring roll	0	ontology_term	0.0
+1	spicy pepper	0	ontology_term	0.0
+1	spice	0	ontology_term	0.0
+1	sockeye salmon	0	ontology_term	0.0
+1	snapper, meat	0	ontology_term	0.0
+1	snapper	0	ontology_term	0.0
+1	snail	0	ontology_term	0.0
+1	smelt, white meat	0	ontology_term	0.0
+1	smelt, skin	0	ontology_term	0.0
+1	smelt, red meat	0	ontology_term	0.0
+1	smelt, midsection	0	ontology_term	0.0
+1	smelt, fin	0	ontology_term	0.0
+1	smelt, face meat	0	ontology_term	0.0
+1	silversides, mixed meat	0	ontology_term	0.0
+1	silversides, head	0	ontology_term	0.0
+1	silversides, gut	0	ontology_term	0.0
+1	silkworm	0	ontology_term	0.0
+1	sesame oil	0	ontology_term	0.0
+1	sauvignon blanc, white	0	ontology_term	0.0
+1	saurkraut	0	ontology_term	0.0
+1	sardine, meat	0	ontology_term	0.0
+1	sardine, fins	0	ontology_term	0.0
+1	sardine, eye	0	ontology_term	0.0
+1	saigon cinnamon	0	ontology_term	0.0
+1	rye	0	ontology_term	0.0
+1	roxanthin	0	ontology_term	0.0
+1	rose wine, red	0	ontology_term	0.0
+1	rose	0	ontology_term	0.0
+1	Rooibos	0	ontology_term	0.0
+1	roma tomato	0	ontology_term	0.0
+1	rock fish, meat	0	ontology_term	0.0
+1	rock fish	0	ontology_term	0.0
+1	ripe black fine truffle	0	ontology_term	0.0
+1	riesling, white	0	ontology_term	0.0
+1	ricotta cheese	0	ontology_term	0.0
+1	ribs, white meat	0	ontology_term	0.0
+1	rhubarb	0	ontology_term	0.0
+1	red sea vegetable	0	ontology_term	0.0
+1	red romaine lettuce	0	ontology_term	0.0
+1	red rice	0	ontology_term	0.0
+1	red radish greens	0	ontology_term	0.0
+1	red guava	0	ontology_term	0.0
+1	red garlic	0	ontology_term	0.0
+1	red cabbage	0	ontology_term	0.0
+1	rat skin and fur	0	ontology_term	0.0
+1	rat	0	ontology_term	0.0
+1	radish greens	0	ontology_term	0.0
+1	rabbit ear	0	ontology_term	0.0
+1	rabbit	0	ontology_term	0.0
+1	quince	0	ontology_term	0.0
+1	purple mangosteen	0	ontology_term	0.0
+1	purple carrot	0	ontology_term	0.0
+1	purple cabbage	0	ontology_term	0.0
+1	purple bean	0	ontology_term	0.0
+1	pumpkin blossom	0	ontology_term	0.0
+1	pumpkin	0	ontology_term	0.0
+1	provolone	0	ontology_term	0.0
+1	prosciutto	0	ontology_term	0.0
+1	premature black fine truffle	0	ontology_term	0.0
+1	pot roast	0	ontology_term	0.0
+1	potato leaf	0	ontology_term	0.0
+1	potato chip	0	ontology_term	0.0
+1	pork white meat	0	ontology_term	0.0
+1	pork sausage	0	ontology_term	0.0
+1	pork red meat	0	ontology_term	0.0
+1	pork end cut	0	ontology_term	0.0
+1	pork chop	0	ontology_term	0.0
+1	pork cheek	0	ontology_term	0.0
+1	pole bean	0	ontology_term	0.0
+1	pod	0	ontology_term	0.0
+1	pitaya	0	ontology_term	0.0
+1	pistachio	0	ontology_term	0.0
+1	pink himalayan salt	0	ontology_term	0.0
+1	pineapple sage	0	ontology_term	0.0
+1	pig back	0	ontology_term	0.0
+1	petit basque cheese	0	ontology_term	0.0
+1	persian cucumber	0	ontology_term	0.0
+1	pepper_spice	0	ontology_term	0.0
+1	pepperonchini	0	ontology_term	0.0
+1	pecan	0	ontology_term	0.0
+1	pearled farro	0	ontology_term	0.0
+1	peanut butter	0	ontology_term	0.0
+1	patty pan squash	0	ontology_term	0.0
+1	palm fruit	0	ontology_term	0.0
+1	pachino cherry tomato	0	ontology_term	0.0
+1	orzo	0	ontology_term	0.0
+1	orange thyme	0	ontology_term	0.0
+1	orange leaf	0	ontology_term	0.0
+1	orange cherry tomato	0	ontology_term	0.0
+1	orange chard	0	ontology_term	0.0
+1	orange carrot	0	ontology_term	0.0
+1	olive oil spread	0	ontology_term	0.0
+1	octopus	0	ontology_term	0.0
+1	nori seaweed	0	ontology_term	0.0
+1	nectarine	0	ontology_term	0.0
+1	natural cheese	0	ontology_term	0.0
+1	nasturtium leaf	0	ontology_term	0.0
+1	mustard greens	0	ontology_term	0.0
+1	mushroom plant	0	ontology_term	0.0
+1	multivitamin	0	ontology_term	0.0
+1	mulberry	0	ontology_term	0.0
+1	mouse skin and fur	0	ontology_term	0.0
+1	mouse skin	0	ontology_term	0.0
+1	mouse intestines	0	ontology_term	0.0
+1	mouse body	0	ontology_term	0.0
+1	moriche palm	0	ontology_term	0.0
+1	morel	0	ontology_term	0.0
+1	molasses	0	ontology_term	0.0
+1	miyaki mushroom	0	ontology_term	0.0
+1	mint mojito	0	ontology_term	0.0
+1	mineral water	0	ontology_term	0.0
+1	millet	0	ontology_term	0.0
+1	milk Oolong	0	ontology_term	0.0
+1	midnight moon cheese	0	ontology_term	0.0
+1	medjool date	0	ontology_term	0.0
+1	matcha green tea	0	ontology_term	0.0
+1	mashed potato	0	ontology_term	0.0
+1	marjoram	0	ontology_term	0.0
+1	marigold	0	ontology_term	0.0
+1	manzanilla olive	0	ontology_term	0.0
+1	mangosteen	0	ontology_term	0.0
+1	maitake mushroom	0	ontology_term	0.0
+1	mackerel, white skin	0	ontology_term	0.0
+1	mackerel, tail muscle	0	ontology_term	0.0
+1	mackerel, tail	0	ontology_term	0.0
+1	mackerel, stomach	0	ontology_term	0.0
+1	mackerel, side muscle	0	ontology_term	0.0
+1	mackerel, red	0	ontology_term	0.0
+1	mackerel, pylo_cec	0	ontology_term	0.0
+1	mackerel, midsection	0	ontology_term	0.0
+1	mackerel, liver	0	ontology_term	0.0
+1	mackerel, intestines	0	ontology_term	0.0
+1	mackerel, heart	0	ontology_term	0.0
+1	mackerel, gill	0	ontology_term	0.0
+1	mackerel, eye lens	0	ontology_term	0.0
+1	mackerel, eyeball frame	0	ontology_term	0.0
+1	mackerel, dig	0	ontology_term	0.0
+1	mackerel, dark fish skin	0	ontology_term	0.0
+1	mackerel, brain	0	ontology_term	0.0
+1	mackerel, bile	0	ontology_term	0.0
+1	mackerel, 7iyn	0	ontology_term	0.0
+1	macaroni	0	ontology_term	0.0
+1	macadamia	0	ontology_term	0.0
+1	lotus seed	0	ontology_term	0.0
+1	lorikeet nectar	0	ontology_term	0.0
+1	lizard tail	0	ontology_term	0.0
+1	lizard head	0	ontology_term	0.0
+1	lizard body	0	ontology_term	0.0
+1	lizard arm	0	ontology_term	0.0
+1	lime leaf	0	ontology_term	0.0
+1	lima bean	0	ontology_term	0.0
+1	licorice	0	ontology_term	0.0
+1	lemon guava	0	ontology_term	0.0
+1	lemon cucumber	0	ontology_term	0.0
+1	leek	0	ontology_term	0.0
+1	laurel	0	ontology_term	0.0
+1	lapacho bark	0	ontology_term	0.0
+1	lamb, top round	0	ontology_term	0.0
+1	lacinato kale	0	ontology_term	0.0
+1	kohlrabi	0	ontology_term	0.0
+1	kava root	0	ontology_term	0.0
+1	kalamata	0	ontology_term	0.0
+1	Jerusalem artichoke	0	ontology_term	0.0
+1	japanese eggplant	0	ontology_term	0.0
+1	jade pearl rice	0	ontology_term	0.0
+1	Iberico cheese	0	ontology_term	0.0
+1	hulled millet	0	ontology_term	0.0
+1	horse, yellow/brown meat	0	ontology_term	0.0
+1	horse, white fat	0	ontology_term	0.0
+1	horse, tough meat	0	ontology_term	0.0
+1	horse, red meat with fat	0	ontology_term	0.0
+1	horse, pink meat	0	ontology_term	0.0
+1	horse, pink fat	0	ontology_term	0.0
+1	horse, mixed meat	0	ontology_term	0.0
+1	horse, middle meat	0	ontology_term	0.0
+1	horse, fatty light meat	0	ontology_term	0.0
+1	horse, dark meat	0	ontology_term	0.0
+1	horse, brown meat	0	ontology_term	0.0
+1	honey_sage	0	ontology_term	0.0
+1	honey_macadamia	0	ontology_term	0.0
+1	honey_chestnut	0	ontology_term	0.0
+1	hing powder	0	ontology_term	0.0
+1	herring, vein/blood	0	ontology_term	0.0
+1	herring, scales	0	ontology_term	0.0
+1	herring, organ	0	ontology_term	0.0
+1	herring, mixed meat	0	ontology_term	0.0
+1	herring, midsection	0	ontology_term	0.0
+1	herring, meat and skin	0	ontology_term	0.0
+1	herring, fins	0	ontology_term	0.0
+1	hemp	0	ontology_term	0.0
+1	heirloom tomato	0	ontology_term	0.0
+1	heirloom lettuce	0	ontology_term	0.0
+1	hay	0	ontology_term	0.0
+1	hass avocado	0	ontology_term	0.0
+1	halibut	0	ontology_term	0.0
+1	guada hervida	0	ontology_term	0.0
+1	ground bison	0	ontology_term	0.0
+1	green squash	0	ontology_term	0.0
+1	green sea vegetable	0	ontology_term	0.0
+1	green mung bean	0	ontology_term	0.0
+1	green lentil	0	ontology_term	0.0
+1	green fennel	0	ontology_term	0.0
+1	green curly baby romaine	0	ontology_term	0.0
+1	green cabbage	0	ontology_term	0.0
+1	grass	0	ontology_term	0.0
+1	golden flaxseed	0	ontology_term	0.0
+1	golden berry	0	ontology_term	0.0
+1	globe artichoke	0	ontology_term	0.0
+1	giant fennel	0	ontology_term	0.0
+1	gastropod	0	ontology_term	0.0
+1	garlic tops	0	ontology_term	0.0
+1	galia	0	ontology_term	0.0
+1	galangal	0	ontology_term	0.0
+1	fuerte avocado	0	ontology_term	0.0
+1	frisee lettuce	0	ontology_term	0.0
+1	french radish	0	ontology_term	0.0
+1	french green	0	ontology_term	0.0
+1	Frederick passion fruit	0	ontology_term	0.0
+1	Flavored Black tea	0	ontology_term	0.0
+1	filtered water	0	ontology_term	0.0
+1	filet mignon	0	ontology_term	0.0
+1	fennel	0	ontology_term	0.0
+1	european soldier bean	0	ontology_term	0.0
+1	escarole	0	ontology_term	0.0
+1	english pea	0	ontology_term	0.0
+1	elk loin	0	ontology_term	0.0
+1	elk	0	ontology_term	0.0
+1	egg_salmon	0	ontology_term	0.0
+1	egg_fish	0	ontology_term	0.0
+1	dulse	0	ontology_term	0.0
+1	dubliner cheese	0	ontology_term	0.0
+1	donut peach	0	ontology_term	0.0
+1	dill flower	0	ontology_term	0.0
+1	date	0	ontology_term	0.0
+1	d anjou pear	0	ontology_term	0.0
+1	dandelion green	0	ontology_term	0.0
+1	curry plant	0	ontology_term	0.0
+1	curly parsley	0	ontology_term	0.0
+1	crystal hops	0	ontology_term	0.0
+1	crimini mushroom	0	ontology_term	0.0
+1	cranberry bean	0	ontology_term	0.0
+1	corn flour	0	ontology_term	0.0
+1	copohazu	0	ontology_term	0.0
+1	common bean	0	ontology_term	0.0
+1	collard greens	0	ontology_term	0.0
+1	cod	0	ontology_term	0.0
+1	cocura	0	ontology_term	0.0
+1	cloves	0	ontology_term	0.0
+1	citrus leaf	0	ontology_term	0.0
+1	churro	0	ontology_term	0.0
+1	chocolate milk	0	ontology_term	0.0
+1	Chlamydomonas reinhardtii	0	ontology_term	0.0
+1	chive stem	0	ontology_term	0.0
+1	chive blossom	0	ontology_term	0.0
+1	chicken liver	0	ontology_term	0.0
+1	chicken, free range	0	ontology_term	0.0
+1	chicken dark meat	0	ontology_term	0.0
+1	chantrelle mushroom	0	ontology_term	0.0
+1	catfish	0	ontology_term	0.0
+1	cassis	0	ontology_term	0.0
+1	cassava flour	0	ontology_term	0.0
+1	caper	0	ontology_term	0.0
+1	cannabis leaf	0	ontology_term	0.0
+1	calcium hydroxide	0	ontology_term	0.0
+1	calcium carbonate	0	ontology_term	0.0
+1	cacoa	0	ontology_term	0.0
+1	butter leaf lettuce	0	ontology_term	0.0
+1	butterfish, spine	0	ontology_term	0.0
+1	butterfish, skin	0	ontology_term	0.0
+1	butterfish, organ	0	ontology_term	0.0
+1	butterfish, midsection	0	ontology_term	0.0
+1	butterfish, fin	0	ontology_term	0.0
+1	butterfish, eye	0	ontology_term	0.0
+1	bunching onion	0	ontology_term	0.0
+1	bull, normal	0	ontology_term	0.0
+1	bull, lean	0	ontology_term	0.0
+1	bull, fatty meat	0	ontology_term	0.0
+1	bull, dark red	0	ontology_term	0.0
+1	brown sea vegetable	0	ontology_term	0.0
+1	brown flaxseed	0	ontology_term	0.0
+1	brazil nut	0	ontology_term	0.0
+1	boschetto cheese	0	ontology_term	0.0
+1	borage leaf	0	ontology_term	0.0
+1	bony fish	0	ontology_term	0.0
+1	bonito	0	ontology_term	0.0
+1	blue corn	0	ontology_term	0.0
+1	blenham apricot	0	ontology_term	0.0
+1	black pig	0	ontology_term	0.0
+1	black pepper	0	ontology_term	0.0
+1	black orca bean	0	ontology_term	0.0
+1	black olive	0	ontology_term	0.0
+1	black mung bean	0	ontology_term	0.0
+1	black mulberry	0	ontology_term	0.0
+1	black mission fig	0	ontology_term	0.0
+1	black lentil	0	ontology_term	0.0
+1	black ant	0	ontology_term	0.0
+1	bison	0	ontology_term	0.0
+1	bergamot	0	ontology_term	0.0
+1	beer mash	0	ontology_term	0.0
+1	beef, white meat	0	ontology_term	0.0
+1	beef, white fat	0	ontology_term	0.0
+1	beef tenderloin	0	ontology_term	0.0
+1	beef short rib	0	ontology_term	0.0
+1	beef, red meat	0	ontology_term	0.0
+1	beef, pink meat	0	ontology_term	0.0
+1	beef, midsection dark meat	0	ontology_term	0.0
+1	bay leaf	0	ontology_term	0.0
+1	basmati rice	0	ontology_term	0.0
+1	bamboo shoot	0	ontology_term	0.0
+1	bamboo	0	ontology_term	0.0
+1	balsamic vinegar	0	ontology_term	0.0
+1	asian pear	0	ontology_term	0.0
+1	arthropod	0	ontology_term	0.0
+1	armenian cucumber	0	ontology_term	0.0
+1	arborio rice	0	ontology_term	0.0
+1	ant	0	ontology_term	0.0
+1	anise	0	ontology_term	0.0
+1	animal feed	0	ontology_term	0.0
+1	anchovy extract	0	ontology_term	0.0
+1	american cheese	0	ontology_term	0.0
+1	ahi tuna, meat	0	ontology_term	0.0
+1	ahi tuna	0	ontology_term	0.0
+1	african catfish	0	ontology_term	0.0
+1	african blue basil	0	ontology_term	0.0
+1	acai	0	ontology_term	0.0
+19	soybean	0	ontology_term	0.0
+19	egg_chicken	0	ontology_term	0.0
+18	peanut	0	ontology_term	0.0
+18	cucumber	0	ontology_term	0.0
+17	strawberry	0	ontology_term	0.0
+17	soda	0	ontology_term	0.0
+17	pseudocarp	0	ontology_term	0.0
+16	water	0	ontology_term	0.0
+16	shellfish	0	ontology_term	0.0
+16	onion	0	ontology_term	0.0
+16	cowpea	0	ontology_term	0.0
+15	lemon	0	ontology_term	0.0
+15	cheddar cheese	0	ontology_term	0.0
+14	washed cheese	0	ontology_term	0.0
+14	mouse	0	ontology_term	0.0
+14	horse meat	0	ontology_term	0.0
+14	beer	0	ontology_term	0.0
+132	cheese	0	ontology_term	0.0
+131	seafood	0	ontology_term	0.0
+12	oat	0	ontology_term	0.0
+12	grapefruit	0	ontology_term	0.0
+12	algae	0	ontology_term	0.0
+11	seaweed	0	ontology_term	0.0
+11	pear	0	ontology_term	0.0
+11	cream	0	ontology_term	0.0
+118	yogurt_cow	0	ontology_term	0.0
+118	yogurt	0	ontology_term	0.0
+114	cow	0	ontology_term	0.0
+110	beef	0	ontology_term	0.0
+10	olive	0	ontology_term	0.0
+10	multifruit	0	ontology_term	0.0
+10	lentil	0	ontology_term	0.0
+10	honey	0	ontology_term	0.0
+10	herring	0	ontology_term	0.0
+10	ham	0	ontology_term	0.0
+10	chili pepper	0	ontology_term	0.0
+10	cabbage	0	ontology_term	0.0
+10	bottled water	0	ontology_term	0.0
+108	legume	0	ontology_term	0.0
+105	poultry	0	ontology_term	0.0
