@@ -52,32 +52,8 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
             if (error) return console.warn(error);
 
             console.log("Applying results to nodes");
-            // add data to nodes
+            // add MASST data to nodes
             applyMasstResults(treeData, rows);
-
-            // Collapse after the second level
-            // root.children.forEach(collapseNoMatch);
-            // applyToAllNodes(root, collapseNoMatch);
-
-            /**
-             * loop over all children and apply callback to all children
-             * @param parentNode parent node will call
-             * @param callback a funtion that is applied to parentNode and all children
-             */
-            function applyToAllNodes(parentNode, callback) {
-                callback(parentNode)
-                let child;
-                if (parentNode.children) {
-                    for (child of parentNode.children) {
-                        applyToAllNodes(child, callback);
-                    }
-                }
-                if (parentNode._children) {
-                    for (child of parentNode._children) {
-                        applyToAllNodes(child, callback);
-                    }
-                }
-            }
 
             // apply results to all nodes
             function applyMasstResults(node, results) {
@@ -85,44 +61,39 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 // sum results for all children (collapsed and non collapsed)
                 var group_size_sum = 0;
                 var matched_size_sum = 0;
-                var occurrence_fraction_sum = 0.0;
 
                 // add values for all children (hidden and shown)
                 const values = applyMasstResultsChildren(node, results);
                 group_size_sum += values[0];
                 matched_size_sum += values[1];
-                occurrence_fraction_sum += values[2];
 
                 // find match in results for this node and add to values
                 const found = results.find(row => row.group_value === node.name)
                 if (found) {
                     group_size_sum += found.group_size
                     matched_size_sum += found.matched_size
-                    occurrence_fraction_sum += found.occurrence_fraction
                 }
                 // set to node
                 node.group_size = group_size_sum
                 node.matched_size = matched_size_sum
-                node.occurrence_fraction = occurrence_fraction_sum
+                node.occurrence_fraction = matched_size_sum / group_size_sum;
 
-                return [group_size_sum, matched_size_sum, occurrence_fraction_sum];
+                return [group_size_sum, matched_size_sum];
             }
 
             // apply to all children
             function applyMasstResultsChildren(node, results) {
                 var group_size_sum = 0;
                 var matched_size_sum = 0;
-                var occurrence_fraction_sum = 0.0;
 
                 if (node.children) {
                     for (child of node.children) {
                         const values = applyMasstResults(child, results);
                         group_size_sum += values[0];
                         matched_size_sum += values[1];
-                        occurrence_fraction_sum += values[2];
                     }
                 }
-                return [group_size_sum, matched_size_sum, occurrence_fraction_sum];
+                return [group_size_sum, matched_size_sum];
             }
 
             // Calculate total nodes, max label length
@@ -446,6 +417,19 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 zoomListener.scale(scale);
                 zoomListener.translate([x, y]);
             }
+            // Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
+            function centerLeftNode(source) {
+                scale = zoomListener.scale();
+                x = -source.y0;
+                y = -source.x0;
+                x = x * scale + 40;
+                y = y * scale + viewerHeight / 2;
+                d3.select('g').transition()
+                    .duration(duration)
+                    .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+                zoomListener.scale(scale);
+                zoomListener.translate([x, y]);
+            }
 
             // Toggle children function
             function toggleChildren(d) {
@@ -513,10 +497,10 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                     })
                     .on('click', click)
                     .on("mouseover", function (d) {
-                        div.transition()
+                        tooltipDiv.transition()
                             .duration(200)
                             .style("opacity", .9);
-                        div.html(
+                        tooltipDiv.html(
                             // show mouse over tooltip. Just for the fun count the clicks in the click method
                             "Name: " + d.name
                             + (d.matched_size > 0 ? "<br/>Matches: " + d.matched_size : "")
@@ -526,6 +510,11 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                         )
                             .style("left", (d3.event.pageX) + "px")
                             .style("top", (d3.event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function (d) {
+                        tooltipDiv.transition()
+                            .duration(200)
+                            .style("opacity", 0);
                     });
 
                 nodeEnter.append("circle")
@@ -666,7 +655,7 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
 
 
             // add tooltip div and set to invisible for now
-            var div = d3.select("body").append("div")
+            var tooltipDiv = d3.select("body").append("div")
                 .attr("class", "tooltip")
                 .style("opacity", 0);
 
@@ -679,9 +668,9 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
             root.y0 = 0;
 
             visitAll(root, expandAllMatches)
-            // Layout the tree initially and center on the root node.
+            // Layout the tree initially and center left on the root node.
             update(root);
-            centerNode(root);
+            centerLeftNode(root);
 
 
             // true if node has group_size>0 (matches)
