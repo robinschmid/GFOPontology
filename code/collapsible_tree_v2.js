@@ -96,6 +96,11 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 return [group_size_sum, matched_size_sum];
             }
 
+            // base radius
+            var radius = 4.5;
+            // colors
+            pieColors = [d3.color("gold"), d3.color("#ccc")];
+
             // Calculate total nodes, max label length
             var totalNodes = 0;
             var maxLabelLength = 0;
@@ -248,6 +253,14 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
 
                 dragStarted = null;
             }
+
+            // for pie charts
+            var pie = d3.layout.pie().sort(null);
+
+            // arcs for pie charts
+            var arc = d3.svg.arc()
+                .outerRadius(radius)
+                .innerRadius(0);
 
             // define the baseSvg, attaching a class for styling and the zoomListener
             var baseSvg = d3.select("#tree-container").append("svg")
@@ -417,6 +430,7 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 zoomListener.scale(scale);
                 zoomListener.translate([x, y]);
             }
+
             // Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
             function centerLeftNode(source) {
                 scale = zoomListener.scale();
@@ -524,6 +538,20 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                         return d._children ? "lightsteelblue" : "#fff";
                     });
 
+
+                nodeEnter.selectAll("g circle")
+                    .data(function (d, i) {
+                        let occurrenceFraction = d.occurrence_fraction;
+                        return pie([occurrenceFraction, 1.0 - occurrenceFraction]);
+                    })
+                    .enter()
+                    .append("path")
+                    .attr("d", arc)
+                    .attr("fill", function (d, i) {
+                        return pieColors[i];
+                    });
+
+
                 nodeEnter.append("text")
                     .attr("x", function (d) {
                         return d.children || d._children ? -10 : 10;
@@ -542,7 +570,7 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 nodeEnter.append("circle")
                     .attr('class', 'ghostCircle')
                     .attr("r", 30)
-                    .attr("opacity", 0.2) // change this to zero to hide the target area
+                    .attr("opacity", 0.1) // change this to zero to hide the target area
                     .style("fill", "red")
                     .attr('pointer-events', 'mouseover')
                     .on("mouseover", function (node) {
@@ -565,6 +593,21 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                     });
 
                 // Change the circle fill depending on whether it has children and is collapsed
+                // node.select("circle.nodeCircle")
+                //     .attr("r", function (d) {
+                //         // set the radius if matches larger : otherwise default to X
+                //         return d.matched_size > 0 ? Math.min(4.5 + Math.sqrt(d.matched_size), 20) : 4.5;
+                //     })
+                //     .style("fill", function (d) {
+                //         // set fill color depending on matches and children
+                //         var matches = d.matched_size
+                //         if (matches > 0) {
+                //             return d._children ? "goldenrod" : "gold";
+                //         } else {
+                //             return d._children ? "lightsteelblue" : "#fff";
+                //         }
+                //         return d._children ? "lightsteelblue" : "#fff";
+                //     });
                 node.select("circle.nodeCircle")
                     .attr("r", function (d) {
                         // set the radius if matches larger : otherwise default to X
@@ -579,7 +622,19 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                             return d._children ? "lightsteelblue" : "#fff";
                         }
                         return d._children ? "lightsteelblue" : "#fff";
-                    });
+                    })
+                // .selectAll("path")
+                // .data(function (d, i) {
+                //     let occurrenceFraction = d.occurrence_fraction;
+                //     return pie([occurrenceFraction, 1.0 - occurrenceFraction]);
+                // })
+                // .enter()
+                // .append("svg:path")
+                // .attr("d", arc)
+                // .attr("fill", function (d, i) {
+                //     return pieColors[i];
+                // })
+                ;
 
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
