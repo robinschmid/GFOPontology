@@ -73,9 +73,18 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                     group_size_sum += found.group_size
                     matched_size_sum += found.matched_size
                 }
+                // add pie dataset for convenience [matched data, rest]
+                node.pie_data = [{}, {}];
+                node.pie_data[0].matched_size = matched_size_sum;
+                node.pie_data[0].occurrence_fraction = matched_size_sum / group_size_sum;
+                node.pie_data[0].index = 0;
+                node.pie_data[1].matched_size = matched_size_sum;
+                node.pie_data[1].occurrence_fraction = 1.0 - matched_size_sum / group_size_sum;
+                node.pie_data[1].index = 1;
+
                 // set to node
-                node.group_size = group_size_sum
-                node.matched_size = matched_size_sum
+                node.group_size = group_size_sum;
+                node.matched_size = matched_size_sum;
                 node.occurrence_fraction = matched_size_sum / group_size_sum;
 
                 return [group_size_sum, matched_size_sum];
@@ -97,9 +106,15 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
             }
 
             // base radius
-            var radius = 4.5;
+            const maxRadius = 20;
+            var radius = 6;
+
             // colors
-            pieColors = [d3.color("gold"), d3.color("#ccc")];
+            var noChildrenColor = "white";
+            var hasChildrenColor = "#e8f4fa";
+            var bgColor = "gold";
+            var matchColor = "#095b85";
+            var pieColors = [matchColor, bgColor];
 
             // Calculate total nodes, max label length
             var totalNodes = 0;
@@ -255,7 +270,11 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
             }
 
             // for pie charts
-            var pie = d3.layout.pie().sort(null);
+            var pie = d3.layout.pie()
+                .sort(null)
+                .value(function (d) {
+                    return d.occurrence_fraction;
+                });
 
             // arcs for pie charts
             var arc = d3.svg.arc()
@@ -465,6 +484,10 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 centerNode(d);
             }
 
+            function calcRadius(matched_size) {
+                return matched_size > 0 ? Math.min(radius + Math.sqrt(matched_size), maxRadius) : radius;
+            }
+
             function update(source) {
                 // Compute the new height, function counts total children of root node and sets tree height accordingly.
                 // This prevents the layout looking squashed when new nodes are made visible or looking sparse when nodes are removed
@@ -481,7 +504,7 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                     }
                 };
                 childCount(0, root);
-                var newHeight = d3.max(levelWidth) * 25; // 25 pixels per line
+                var newHeight = d3.max(levelWidth) * 30; // 25 pixels per line
                 tree = tree.size([newHeight, viewerWidth]);
 
                 // Compute the new tree layout.
@@ -535,20 +558,26 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                     .attr('class', 'nodeCircle')
                     .attr("r", 0)
                     .style("fill", function (d) {
-                        return d._children ? "lightsteelblue" : "#fff";
+                        return d._children ? hasChildrenColor : noChildrenColor;
                     });
 
 
-                nodeEnter.selectAll("g circle")
+                // add pie chart
+                nodeEnter.selectAll("g path")
                     .data(function (d, i) {
-                        let occurrenceFraction = d.occurrence_fraction;
-                        return pie([occurrenceFraction, 1.0 - occurrenceFraction]);
+                        if (d.occurrence_fraction > 0) {
+                            return pie(d.pie_data);
+                        } else {
+                            return [];
+                        }
                     })
                     .enter()
-                    .append("path")
-                    .attr("d", arc)
+                    .append("svg:path")
                     .attr("fill", function (d, i) {
-                        return pieColors[i];
+                        return pieColors[d.data.index];
+                    })
+                    .attr("d", function (d) {
+                        return d3.svg.arc().outerRadius(calcRadius(d.data.matched_size))(d);
                     });
 
 
@@ -592,6 +621,7 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                         return d.name;
                     });
 
+
                 // Change the circle fill depending on whether it has children and is collapsed
                 // node.select("circle.nodeCircle")
                 //     .attr("r", function (d) {
@@ -611,17 +641,16 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 node.select("circle.nodeCircle")
                     .attr("r", function (d) {
                         // set the radius if matches larger : otherwise default to X
-                        return d.matched_size > 0 ? Math.min(4.5 + Math.sqrt(d.matched_size), 20) : 4.5;
+                        return calcRadius(d.matched_size);
                     })
                     .style("fill", function (d) {
                         // set fill color depending on matches and children
                         var matches = d.matched_size
                         if (matches > 0) {
-                            return d._children ? "goldenrod" : "gold";
+                            return matchColor;
                         } else {
-                            return d._children ? "lightsteelblue" : "#fff";
+                            return d._children ? hasChildrenColor : noChildrenColor;
                         }
-                        return d._children ? "lightsteelblue" : "#fff";
                     })
                 // .selectAll("path")
                 // .data(function (d, i) {
@@ -646,6 +675,14 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 // Fade the text in
                 nodeUpdate.select("text")
                     .style("fill-opacity", 1);
+
+                nodeUpdate.select("g circle path")
+                    .attr("d", function (d) {
+                        return d3.svg.arc().outerRadius(calcRadius(d.data.matched_size))(d);
+                    })
+                    .attr("fill", function (d, i) {
+                        return pieColors[i];
+                    });
 
                 // Transition exiting nodes to the parent's new position.
                 var nodeExit = node.exit().transition()
