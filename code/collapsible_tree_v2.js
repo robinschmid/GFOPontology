@@ -30,7 +30,6 @@ const gfopOntologyFile = "https://raw.githubusercontent.com/robinschmid/GFOPonto
 const masstResultsFile =
     "https://raw.githubusercontent.com/robinschmid/GFOPontology/master/examples/caffeic_acid.tsv";
 
-
 treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
     if (error) return console.warn(error);
     // read masst results and reflect to nodes
@@ -161,6 +160,25 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
 
             function visitAll(parent, visitFn) {
                 visit(parent, visitFn, getAllChildren);
+            }
+
+            function visitToLevel(parent, level, visitFn) {
+                visitToLevel(parent, level, visitFn, getAllChildren);
+            }
+
+            function visitToLevel(parent, level, visitFn, childrenFn) {
+                if (!parent || level < 0) return;
+
+                visitFn(parent);
+                if (level > 1) {
+                    var children = childrenFn(parent);
+                    if (children) {
+                        var count = children.length;
+                        for (var i = 0; i < count; i++) {
+                            visitToLevel(children[i], level - 1, visitFn, childrenFn);
+                        }
+                    }
+                }
             }
 
             // Call visit function to establish maxLabelLength
@@ -746,6 +764,11 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
             }
 
 
+            function collapseAll() {
+                visitAll(root, collapse);
+            }
+
+
             // add tooltip div and set to invisible for now
             var tooltipDiv = d3.select("body").append("div")
                 .attr("class", "tooltip")
@@ -763,7 +786,6 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
             // Layout the tree initially and center left on the root node.
             update(root);
             centerLeftNode(root);
-
 
             // true if node has group_size>0 (matches)
             function hasMatches(node) {
@@ -788,6 +810,14 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                     collapse(node)
                 }
             }
+
+
+            function collapseToLevel(level) {
+                visitAll(root, collapse);
+                visitToLevel(root, level, expand);
+            }
+
+
         });
     }
 });
