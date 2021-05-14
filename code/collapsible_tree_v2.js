@@ -34,10 +34,13 @@ const masstResultsFile =
 const isNodeDragActive = false;
 
 // base radius
+var isScalingActive = true;
 const maxRadius = 20;
 var radius = 6;
 
 // colors
+var lineColor = "#ccc";
+var nodeStrokeColor = "steelblue";
 var noChildrenColor = "white";
 var hasChildrenColor = "#e8f4fa";
 var bgColor = "gold";
@@ -106,6 +109,17 @@ function expandAllAndUpdate() {
     }
 }
 
+function toggleScalingAndUpdate() {
+    if (root) {
+        isScalingActive = !isScalingActive;
+        update(root);
+    }
+}
+
+
+/**
+ * The actual code to create the tree
+ */
 treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
     if (error) return console.warn(error);
 
@@ -180,6 +194,58 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 }
                 return [group_size_sum, matched_size_sum];
             }
+
+            // initialize drop down style menu
+            var allGroup = ["default", "contrast", "B+W"]
+
+            // Initialize the button
+            var dropdownButton = d3.select("#styleCombo")
+                .append('select')
+
+            // add the options to the button
+            dropdownButton // Add a button
+                .selectAll('myOptions') // add all options
+                .data(allGroup)
+                .enter()
+                .append('option')
+                .text(function (d) {
+                    return d;
+                }) // text showed in the menu
+                .attr("value", function (d) {
+                    return d;
+                }) // corresponding value returned by the button
+
+            // When the button is changed, update style
+            dropdownButton.on("change", function (d) {
+                // recover the option that has been chosen
+                var selectedOption = d3.select(this).property("value");
+
+                if ("default" === selectedOption) {
+                    noChildrenColor = "white";
+                    hasChildrenColor = "#e8f4fa";
+                    bgColor = "gold";
+                    matchColor = "#095b85";
+                    lineColor = "#ccc";
+                    nodeStrokeColor = "steelblue";
+                } else if ("contrast" === selectedOption) {
+                    noChildrenColor = "white";
+                    hasChildrenColor = "#e8f4fa";
+                    bgColor = "#E3BAFF";
+                    matchColor = "#118B8C";
+                    lineColor = "orange";
+                    nodeStrokeColor = "#8840F0";
+                } else if ("B+W" === selectedOption) {
+                    noChildrenColor = "white";
+                    hasChildrenColor = "#f4f4f4";
+                    bgColor = "white";
+                    matchColor = "black";
+                    lineColor = "#ccc";
+                    nodeStrokeColor = "black";
+                }
+
+                pieColors = [matchColor, bgColor];
+                update(root);
+            });
 
             // size of the diagram
             viewerWidth = $(document).width();
@@ -453,7 +519,7 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
  * @returns {number}
  */
 function calcRadius(matched_size) {
-    return matched_size > 0 ? Math.min(radius + Math.sqrt(matched_size), maxRadius) : radius;
+    return matched_size > 0 && isScalingActive ? Math.min(radius + Math.sqrt(matched_size), maxRadius) : radius;
 }
 
 // Toggle children on click.
@@ -533,6 +599,7 @@ function update(source) {
     nodeEnter.append("circle")
         .attr('class', 'nodeCircle')
         .attr("r", 0)
+        .style("stroke", nodeStrokeColor)
         .style("fill", function (d) {
             return d._children ? hasChildrenColor : noChildrenColor;
         });
@@ -549,6 +616,7 @@ function update(source) {
         })
         .enter()
         .append("svg:path")
+        .attr('class', 'nodePie')
         .attr("fill", function (d, i) {
             return pieColors[d.data.index];
         })
@@ -597,6 +665,14 @@ function update(source) {
             return d.name;
         });
 
+    // update pie charts
+    // node.select("g path.nodePie")
+    //     .attr("fill", function (d, i) {
+    //         return pieColors[d.pie_data.index];
+    //     })
+    //     .attr("d", function (d) {
+    //         return d3.svg.arc().outerRadius(calcRadius(d.data.matched_size))(d);
+    //     });
 
     // Change the circle fill depending on whether it has children and is collapsed
     // node.select("circle.nodeCircle")
@@ -619,6 +695,7 @@ function update(source) {
             // set the radius if matches larger : otherwise default to X
             return calcRadius(d.matched_size);
         })
+        .style("stroke", nodeStrokeColor)
         .style("fill", function (d) {
             // set fill color depending on matches and children
             var matches = d.matched_size
@@ -652,12 +729,12 @@ function update(source) {
     nodeUpdate.select("text")
         .style("fill-opacity", 1);
 
-    nodeUpdate.select("g circle path")
+    nodeUpdate.selectAll("path.nodePie")
         .attr("d", function (d) {
             return d3.svg.arc().outerRadius(calcRadius(d.data.matched_size))(d);
         })
         .attr("fill", function (d, i) {
-            return pieColors[i];
+            return pieColors[d.data.index];
         });
 
     // Transition exiting nodes to the parent's new position.
@@ -683,6 +760,7 @@ function update(source) {
     // Enter any new links at the parent's previous position.
     link.enter().insert("path", "g")
         .attr("class", "link")
+        .style("stroke", lineColor)
         .attr("d", function (d) {
             var o = {
                 x: source.x0,
@@ -697,6 +775,7 @@ function update(source) {
     // Transition links to their new position.
     link.transition()
         .duration(duration)
+        .style("stroke", lineColor)
         .attr("d", diagonal);
 
     // Transition exiting nodes to the parent's new position.
