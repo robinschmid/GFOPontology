@@ -57,6 +57,12 @@
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="collapsible_tree_v2.js"></script>
 <body>
+<input type="button" value="Collapse" onclick="collapseAllAndUpdate()" />
+<input type="button" value="Expand matched" onclick="expandMatchedAndUpdate()" />
+<input type="button" value="Expand" onclick="expandAllAndUpdate()" />
+<input type="checkbox" id="cbSize" onclick="toggleScaling()"> Scale
+<!-- Style combobox - placeholder will be filled by d3 -->
+<div id="styleCombo"></div>
 <div id="tree-container"></div>
 </body>
 </html>

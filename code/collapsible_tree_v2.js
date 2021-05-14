@@ -30,8 +30,85 @@ const gfopOntologyFile = "https://raw.githubusercontent.com/robinschmid/GFOPonto
 const masstResultsFile =
     "https://raw.githubusercontent.com/robinschmid/GFOPontology/master/examples/caffeic_acid.tsv";
 
+// turn off node dragging
+const isNodeDragActive = false;
+
+// base radius
+const maxRadius = 20;
+var radius = 6;
+
+// colors
+var noChildrenColor = "white";
+var hasChildrenColor = "#e8f4fa";
+var bgColor = "gold";
+var matchColor = "#095b85";
+var pieColors = [matchColor, bgColor];
+
+// Calculate total nodes, max label length
+var totalNodes = 0;
+var maxLabelLength = 0;
+// variables for drag/drop
+var selectedNode = null;
+var draggingNode = null;
+// panning variables
+var panSpeed = 200;
+var panBoundary = 20; // Within 20px from edges will pan when dragging.
+// Misc. variables
+var i = 0;
+var duration = 750;
+var root;
+
+var zoomListener;
+// size of the diagram
+var viewerWidth;
+var viewerHeight;
+// tree builder
+var tree;
+// tooltip
+var tooltipDiv;
+// svg objects
+var baseSvg;
+var svgGroup;
+// define a d3 diagonal projection for use by the node paths later on.
+var diagonal = d3.svg.diagonal()
+    .projection(function (d) {
+        return [d.y, d.x];
+    });
+// for pie charts
+var pie = d3.layout.pie()
+    .sort(null)
+    .value(function (d) {
+        return d.occurrence_fraction;
+    });
+
+// functions to trigger from outside (html buttons)
+function collapseAllAndUpdate() {
+    if (root) {
+        collapseToLevel(1)
+        update(root);
+        centerLeftNode(root);
+    }
+}
+
+function expandMatchedAndUpdate() {
+    if (root) {
+        visitAll(root, expandAllMatches)
+        update(root);
+        centerLeftNode(root);
+    }
+}
+
+function expandAllAndUpdate() {
+    if (root) {
+        visitAll(root, expand)
+        update(root);
+        centerLeftNode(root);
+    }
+}
+
 treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
     if (error) return console.warn(error);
+
     // read masst results and reflect to nodes
     readMasstResults(masstResultsFile, treeData);
 
@@ -104,82 +181,13 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 return [group_size_sum, matched_size_sum];
             }
 
-            // base radius
-            const maxRadius = 20;
-            var radius = 6;
-
-            // colors
-            var noChildrenColor = "white";
-            var hasChildrenColor = "#e8f4fa";
-            var bgColor = "gold";
-            var matchColor = "#095b85";
-            var pieColors = [matchColor, bgColor];
-
-            // Calculate total nodes, max label length
-            var totalNodes = 0;
-            var maxLabelLength = 0;
-            // variables for drag/drop
-            var selectedNode = null;
-            var draggingNode = null;
-            // panning variables
-            var panSpeed = 200;
-            var panBoundary = 20; // Within 20px from edges will pan when dragging.
-            // Misc. variables
-            var i = 0;
-            var duration = 750;
-            var root;
-
             // size of the diagram
-            var viewerWidth = $(document).width();
-            var viewerHeight = $(document).height();
+            viewerWidth = $(document).width();
+            viewerHeight = $(document).height();
 
-            var tree = d3.layout.tree()
+            tree = d3.layout.tree()
                 .size([viewerHeight, viewerWidth]);
 
-            // define a d3 diagonal projection for use by the node paths later on.
-            var diagonal = d3.svg.diagonal()
-                .projection(function (d) {
-                    return [d.y, d.x];
-                });
-
-            // A recursive helper function for performing some setup by walking through all nodes
-
-            function visit(parent, visitFn, childrenFn) {
-                if (!parent) return;
-
-                visitFn(parent);
-
-                var children = childrenFn(parent);
-                if (children) {
-                    var count = children.length;
-                    for (var i = 0; i < count; i++) {
-                        visit(children[i], visitFn, childrenFn);
-                    }
-                }
-            }
-
-            function visitAll(parent, visitFn) {
-                visit(parent, visitFn, getAllChildren);
-            }
-
-            function visitToLevel(parent, level, visitFn) {
-                visitToLevel(parent, level, visitFn, getAllChildren);
-            }
-
-            function visitToLevel(parent, level, visitFn, childrenFn) {
-                if (!parent || level < 0) return;
-
-                visitFn(parent);
-                if (level > 1) {
-                    var children = childrenFn(parent);
-                    if (children) {
-                        var count = children.length;
-                        for (var i = 0; i < count; i++) {
-                            visitToLevel(children[i], level - 1, visitFn, childrenFn);
-                        }
-                    }
-                }
-            }
 
             // Call visit function to establish maxLabelLength
             visitAll(treeData, function (d) {
@@ -187,29 +195,10 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 maxLabelLength = Math.max(d.name.length, maxLabelLength);
             });
 
-            // get all children of parent
-            function getAllChildren(parent) {
-                if (parent.children && parent.children.length > 0) {
-                    return parent.children;
-                }
-                if (parent._children && parent._children.length > 0) {
-                    return parent._children;
-                }
-                return null;
-            }
-
-            // sort the tree according to the node names
-            function sortTree() {
-                tree.sort(function (a, b) {
-                    return b.name.toLowerCase() < a.name.toLowerCase() ? 1 : -1;
-                });
-            }
-
             // Sort the tree initially incase the JSON isn't in a sorted order.
             sortTree();
 
             // TODO: Pan function, can be better implemented.
-
             function pan(domNode, direction) {
                 var speed = panSpeed;
                 if (panTimer) {
@@ -236,16 +225,20 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
             }
 
             // Define the zoom function for the zoomable tree
-
             function zoom() {
                 svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
             }
 
-
             // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
-            var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
+            zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
+
 
             function initiateDrag(d, domNode) {
+                // skip dragging
+                if (!isNodeDragActive) {
+                    return;
+                }
+
                 draggingNode = d;
                 d3.select(domNode).select('.ghostCircle').attr('pointer-events', 'none');
                 d3.selectAll('.ghostCircle').attr('class', 'ghostCircle show');
@@ -287,20 +280,8 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 dragStarted = null;
             }
 
-            // for pie charts
-            var pie = d3.layout.pie()
-                .sort(null)
-                .value(function (d) {
-                    return d.occurrence_fraction;
-                });
-
-            // arcs for pie charts
-            var arc = d3.svg.arc()
-                .outerRadius(radius)
-                .innerRadius(0);
-
             // define the baseSvg, attaching a class for styling and the zoomListener
-            var baseSvg = d3.select("#tree-container").append("svg")
+            baseSvg = d3.select("#tree-container").append("svg")
                 .attr("width", viewerWidth)
                 .attr("height", viewerHeight)
                 .attr("class", "overlay")
@@ -350,12 +331,21 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                         }
                     }
 
-                    d.x0 += d3.event.dy;
-                    d.y0 += d3.event.dx;
-                    var node = d3.select(this);
-                    node.attr("transform", "translate(" + d.y0 + "," + d.x0 + ")");
-                    updateTempConnector();
+                    // drag node
+                    if (isNodeDragActive) {
+                        // shift node with mouse movement:
+                        d.x0 += d3.event.dy;
+                        d.y0 += d3.event.dx;
+                        var node = d3.select(this);
+                        node.attr("transform", "translate(" + d.y0 + "," + d.x0 + ")");
+                        updateTempConnector();
+                    }
                 }).on("dragend", function (d) {
+                    // node dragging turned off
+                    if (!isNodeDragActive) {
+                        return;
+                    }
+
                     if (d == root) {
                         return;
                     }
@@ -399,24 +389,6 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 }
             }
 
-            // Helper functions for collapsing and expanding nodes.
-
-            function collapse(d) {
-                if (d.children) {
-                    d._children = d.children;
-                    d._children.forEach(collapse);
-                    d.children = null;
-                }
-            }
-
-            function expand(d) {
-                if (d._children) {
-                    d.children = d._children;
-                    d.children.forEach(expand);
-                    d._children = null;
-                }
-            }
-
             var overCircle = function (d) {
                 selectedNode = d;
                 updateTempConnector();
@@ -454,328 +426,13 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                 link.exit().remove();
             };
 
-            // Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
-            function centerNode(source) {
-                scale = zoomListener.scale();
-                x = -source.y0;
-                y = -source.x0;
-                x = x * scale + viewerWidth / 2;
-                y = y * scale + viewerHeight / 2;
-                d3.select('g').transition()
-                    .duration(duration)
-                    .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
-                zoomListener.scale(scale);
-                zoomListener.translate([x, y]);
-            }
-
-            // Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
-            function centerLeftNode(source) {
-                scale = zoomListener.scale();
-                x = -source.y0;
-                y = -source.x0;
-                x = x * scale + 40;
-                y = y * scale + viewerHeight / 2;
-                d3.select('g').transition()
-                    .duration(duration)
-                    .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
-                zoomListener.scale(scale);
-                zoomListener.translate([x, y]);
-            }
-
-            // Toggle children function
-            function toggleChildren(d) {
-                if (d.children) {
-                    d._children = d.children;
-                    d.children = null;
-                } else if (d._children) {
-                    d.children = d._children;
-                    d._children = null;
-                }
-                return d;
-            }
-
-            // Toggle children on click.
-            function click(d) {
-                if (d3.event.defaultPrevented) return; // click suppressed
-                d = toggleChildren(d);
-                update(d);
-                centerNode(d);
-            }
-
-            function calcRadius(matched_size) {
-                return matched_size > 0 ? Math.min(radius + Math.sqrt(matched_size), maxRadius) : radius;
-            }
-
-            function update(source) {
-                // Compute the new height, function counts total children of root node and sets tree height accordingly.
-                // This prevents the layout looking squashed when new nodes are made visible or looking sparse when nodes are removed
-                // This makes the layout more consistent.
-                var levelWidth = [1];
-                var childCount = function (level, n) {
-                    if (n.children && n.children.length > 0) {
-                        if (levelWidth.length <= level + 1) levelWidth.push(0);
-
-                        levelWidth[level + 1] += n.children.length;
-                        n.children.forEach(function (d) {
-                            childCount(level + 1, d);
-                        });
-                    }
-                };
-                childCount(0, root);
-                var newHeight = d3.max(levelWidth) * 30; // 25 pixels per line
-                tree = tree.size([newHeight, viewerWidth]);
-
-                // Compute the new tree layout.
-                var nodes = tree.nodes(root).reverse(),
-                    links = tree.links(nodes);
-
-                // Set widths between levels based on maxLabelLength.
-                nodes.forEach(function (d) {
-                    d.y = (d.depth * (maxLabelLength * 10)); //maxLabelLength * 10px
-                    // alternatively to keep a fixed scale one can set a fixed depth per level
-                    // Normalize for fixed-depth by commenting out below line
-                    // d.y = (d.depth * 500); //500px per level.
-                });
-
-                // Update the nodes…
-                node = svgGroup.selectAll("g.node")
-                    .data(nodes, function (d) {
-                        return d.id || (d.id = ++i);
-                    });
-
-                // Enter any new nodes at the parent's previous position.
-                var nodeEnter = node.enter().append("g")
-                    .call(dragListener)
-                    .attr("class", "node")
-                    .attr("transform", function (d) {
-                        return "translate(" + source.y0 + "," + source.x0 + ")";
-                    })
-                    .on('click', click)
-                    .on("mouseover", function (d) {
-                        tooltipDiv.transition()
-                            .duration(200)
-                            .style("opacity", .9);
-                        tooltipDiv.html(
-                            // show mouse over tooltip. Just for the fun count the clicks in the click method
-                            "Name: " + d.name
-                            + (d.matched_size > 0 ? "<br/>Matches: " + d.matched_size : "")
-                            + (d.occurrence_fraction > 0 ? "<br/>Occurance fraction: " + d.occurrence_fraction : "")
-                            + (d.group_size > 0 ? "<br/>Group size: " + d.group_size : "")
-                            + (d.clicks_counter > 0 ? "<br/>Clicks: " + d.clicks_counter : "")
-                        )
-                            .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px");
-                    })
-                    .on("mouseout", function (d) {
-                        tooltipDiv.transition()
-                            .duration(200)
-                            .style("opacity", 0);
-                    });
-
-                nodeEnter.append("circle")
-                    .attr('class', 'nodeCircle')
-                    .attr("r", 0)
-                    .style("fill", function (d) {
-                        return d._children ? hasChildrenColor : noChildrenColor;
-                    });
-
-
-                // add pie chart
-                nodeEnter.selectAll("g path")
-                    .data(function (d, i) {
-                        if (d.occurrence_fraction > 0) {
-                            return pie(d.pie_data);
-                        } else {
-                            return [];
-                        }
-                    })
-                    .enter()
-                    .append("svg:path")
-                    .attr("fill", function (d, i) {
-                        return pieColors[d.data.index];
-                    })
-                    .attr("d", function (d) {
-                        return d3.svg.arc().outerRadius(calcRadius(d.data.matched_size))(d);
-                    });
-
-
-                nodeEnter.append("text")
-                    .attr("x", function (d) {
-                        return d.children || d._children ? -10 : 10;
-                    })
-                    .attr("dy", ".35em")
-                    .attr('class', 'nodeText')
-                    .attr("text-anchor", function (d) {
-                        return d.children || d._children ? "end" : "start";
-                    })
-                    .text(function (d) {
-                        return d.name;
-                    })
-                    .style("fill-opacity", 0);
-
-                // phantom node to give us mouseover in a radius around it
-                nodeEnter.append("circle")
-                    .attr('class', 'ghostCircle')
-                    .attr("r", 30)
-                    .attr("opacity", 0.1) // change this to zero to hide the target area
-                    .style("fill", "red")
-                    .attr('pointer-events', 'mouseover')
-                    .on("mouseover", function (node) {
-                        overCircle(node);
-                    })
-                    .on("mouseout", function (node) {
-                        outCircle(node);
-                    });
-
-                // Update the text to reflect whether node has children or not.
-                node.select('text')
-                    .attr("x", function (d) {
-                        return d.children || d._children ? -10 : 10;
-                    })
-                    .attr("text-anchor", function (d) {
-                        return d.children || d._children ? "end" : "start";
-                    })
-                    .text(function (d) {
-                        return d.name;
-                    });
-
-
-                // Change the circle fill depending on whether it has children and is collapsed
-                // node.select("circle.nodeCircle")
-                //     .attr("r", function (d) {
-                //         // set the radius if matches larger : otherwise default to X
-                //         return d.matched_size > 0 ? Math.min(4.5 + Math.sqrt(d.matched_size), 20) : 4.5;
-                //     })
-                //     .style("fill", function (d) {
-                //         // set fill color depending on matches and children
-                //         var matches = d.matched_size
-                //         if (matches > 0) {
-                //             return d._children ? "goldenrod" : "gold";
-                //         } else {
-                //             return d._children ? "lightsteelblue" : "#fff";
-                //         }
-                //         return d._children ? "lightsteelblue" : "#fff";
-                //     });
-                node.select("circle.nodeCircle")
-                    .attr("r", function (d) {
-                        // set the radius if matches larger : otherwise default to X
-                        return calcRadius(d.matched_size);
-                    })
-                    .style("fill", function (d) {
-                        // set fill color depending on matches and children
-                        var matches = d.matched_size
-                        if (matches > 0) {
-                            return matchColor;
-                        } else {
-                            return d._children ? hasChildrenColor : noChildrenColor;
-                        }
-                    })
-                // .selectAll("path")
-                // .data(function (d, i) {
-                //     let occurrenceFraction = d.occurrence_fraction;
-                //     return pie([occurrenceFraction, 1.0 - occurrenceFraction]);
-                // })
-                // .enter()
-                // .append("svg:path")
-                // .attr("d", arc)
-                // .attr("fill", function (d, i) {
-                //     return pieColors[i];
-                // })
-                ;
-
-                // Transition nodes to their new position.
-                var nodeUpdate = node.transition()
-                    .duration(duration)
-                    .attr("transform", function (d) {
-                        return "translate(" + d.y + "," + d.x + ")";
-                    });
-
-                // Fade the text in
-                nodeUpdate.select("text")
-                    .style("fill-opacity", 1);
-
-                nodeUpdate.select("g circle path")
-                    .attr("d", function (d) {
-                        return d3.svg.arc().outerRadius(calcRadius(d.data.matched_size))(d);
-                    })
-                    .attr("fill", function (d, i) {
-                        return pieColors[i];
-                    });
-
-                // Transition exiting nodes to the parent's new position.
-                var nodeExit = node.exit().transition()
-                    .duration(duration)
-                    .attr("transform", function (d) {
-                        return "translate(" + source.y + "," + source.x + ")";
-                    })
-                    .remove();
-
-                nodeExit.select("circle")
-                    .attr("r", 0);
-
-                nodeExit.select("text")
-                    .style("fill-opacity", 0);
-
-                // Update the links…
-                var link = svgGroup.selectAll("path.link")
-                    .data(links, function (d) {
-                        return d.target.id;
-                    });
-
-                // Enter any new links at the parent's previous position.
-                link.enter().insert("path", "g")
-                    .attr("class", "link")
-                    .attr("d", function (d) {
-                        var o = {
-                            x: source.x0,
-                            y: source.y0
-                        };
-                        return diagonal({
-                            source: o,
-                            target: o
-                        });
-                    });
-
-                // Transition links to their new position.
-                link.transition()
-                    .duration(duration)
-                    .attr("d", diagonal);
-
-                // Transition exiting nodes to the parent's new position.
-                link.exit().transition()
-                    .duration(duration)
-                    .attr("d", function (d) {
-                        var o = {
-                            x: source.x,
-                            y: source.y
-                        };
-                        return diagonal({
-                            source: o,
-                            target: o
-                        });
-                    })
-                    .remove();
-
-                // Stash the old positions for transition.
-                nodes.forEach(function (d) {
-                    d.x0 = d.x;
-                    d.y0 = d.y;
-                });
-            }
-
-
-            function collapseAll() {
-                visitAll(root, collapse);
-            }
-
-
             // add tooltip div and set to invisible for now
-            var tooltipDiv = d3.select("body").append("div")
+            tooltipDiv = d3.select("body").append("div")
                 .attr("class", "tooltip")
                 .style("opacity", 0);
 
             // Append a group which holds all nodes and which the zoom Listener can act upon.
-            var svgGroup = baseSvg.append("g");
+            svgGroup = baseSvg.append("g");
 
             // Define the root
             root = treeData;
@@ -786,38 +443,430 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
             // Layout the tree initially and center left on the root node.
             update(root);
             centerLeftNode(root);
-
-            // true if node has group_size>0 (matches)
-            function hasMatches(node) {
-                return node.matched_size > 0;
-            }
-
-            // true if node has group_size>0 (matches)
-            function hasNoMatches(node) {
-                return !hasMatches(node);
-            }
-
-            /**
-             * Collapse the node and all it's children
-             * @param node a node and its children
-             * @param predicate a function to define if nodes should be collapsed (true) or shown (false). predicate should
-             * take a node
-             */
-            function expandAllMatches(node) {
-                if (hasMatches(node)) {
-                    expand(node)
-                } else {
-                    collapse(node)
-                }
-            }
-
-
-            function collapseToLevel(level) {
-                visitAll(root, collapse);
-                visitToLevel(root, level, expand);
-            }
-
-
         });
     }
 });
+
+/**
+ * Calculate radius for nodes and pie charts
+ * @param matched_size
+ * @returns {number}
+ */
+function calcRadius(matched_size) {
+    return matched_size > 0 ? Math.min(radius + Math.sqrt(matched_size), maxRadius) : radius;
+}
+
+// Toggle children on click.
+function click(d) {
+    if (d3.event.defaultPrevented) return; // click suppressed
+    d = toggleChildren(d);
+    update(d);
+    centerNode(d);
+}
+
+// update view
+function update(source) {
+    // Compute the new height, function counts total children of root node and sets tree height accordingly.
+    // This prevents the layout looking squashed when new nodes are made visible or looking sparse when nodes are removed
+    // This makes the layout more consistent.
+    var levelWidth = [1];
+    var childCount = function (level, n) {
+        if (n.children && n.children.length > 0) {
+            if (levelWidth.length <= level + 1) levelWidth.push(0);
+
+            levelWidth[level + 1] += n.children.length;
+            n.children.forEach(function (d) {
+                childCount(level + 1, d);
+            });
+        }
+    };
+    childCount(0, root);
+    var newHeight = d3.max(levelWidth) * 30; // 25 pixels per line
+    tree = tree.size([newHeight, viewerWidth]);
+
+    // Compute the new tree layout.
+    var nodes = tree.nodes(root).reverse(),
+        links = tree.links(nodes);
+
+    // Set widths between levels based on maxLabelLength.
+    nodes.forEach(function (d) {
+        d.y = (d.depth * (maxLabelLength * 10)); //maxLabelLength * 10px
+        // alternatively to keep a fixed scale one can set a fixed depth per level
+        // Normalize for fixed-depth by commenting out below line
+        // d.y = (d.depth * 500); //500px per level.
+    });
+
+    // Update the nodes…
+    node = svgGroup.selectAll("g.node")
+        .data(nodes, function (d) {
+            return d.id || (d.id = ++i);
+        });
+
+    // Enter any new nodes at the parent's previous position.
+    var nodeEnter = node.enter().append("g")
+        .call(dragListener)
+        .attr("class", "node")
+        .attr("transform", function (d) {
+            return "translate(" + source.y0 + "," + source.x0 + ")";
+        })
+        .on('click', click)
+        .on("mouseover", function (d) {
+            tooltipDiv.transition()
+                .duration(200)
+                .style("opacity", .9);
+            tooltipDiv.html(
+                // show mouse over tooltip. Just for the fun count the clicks in the click method
+                "Name: " + d.name
+                + (d.matched_size > 0 ? "<br/>Matches: " + d.matched_size : "")
+                + (d.occurrence_fraction > 0 ? "<br/>Occurance fraction: " + d.occurrence_fraction : "")
+                + (d.group_size > 0 ? "<br/>Group size: " + d.group_size : "")
+            )
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function (d) {
+            tooltipDiv.transition()
+                .duration(200)
+                .style("opacity", 0);
+        });
+
+    nodeEnter.append("circle")
+        .attr('class', 'nodeCircle')
+        .attr("r", 0)
+        .style("fill", function (d) {
+            return d._children ? hasChildrenColor : noChildrenColor;
+        });
+
+
+    // add pie chart
+    nodeEnter.selectAll("g path")
+        .data(function (d, i) {
+            if (d.occurrence_fraction > 0) {
+                return pie(d.pie_data);
+            } else {
+                return [];
+            }
+        })
+        .enter()
+        .append("svg:path")
+        .attr("fill", function (d, i) {
+            return pieColors[d.data.index];
+        })
+        .attr("d", function (d) {
+            return d3.svg.arc().outerRadius(calcRadius(d.data.matched_size))(d);
+        });
+
+
+    nodeEnter.append("text")
+        .attr("x", function (d) {
+            return d.children || d._children ? -10 : 10;
+        })
+        .attr("dy", ".35em")
+        .attr('class', 'nodeText')
+        .attr("text-anchor", function (d) {
+            return d.children || d._children ? "end" : "start";
+        })
+        .text(function (d) {
+            return d.name;
+        })
+        .style("fill-opacity", 0);
+
+    // phantom node to give us mouseover in a radius around it
+    nodeEnter.append("circle")
+        .attr('class', 'ghostCircle')
+        .attr("r", 30)
+        .attr("opacity", 0.1) // change this to zero to hide the target area
+        .style("fill", "red")
+        .attr('pointer-events', 'mouseover')
+        .on("mouseover", function (node) {
+            overCircle(node);
+        })
+        .on("mouseout", function (node) {
+            outCircle(node);
+        });
+
+    // Update the text to reflect whether node has children or not.
+    node.select('text')
+        .attr("x", function (d) {
+            return d.children || d._children ? -10 : 10;
+        })
+        .attr("text-anchor", function (d) {
+            return d.children || d._children ? "end" : "start";
+        })
+        .text(function (d) {
+            return d.name;
+        });
+
+
+    // Change the circle fill depending on whether it has children and is collapsed
+    // node.select("circle.nodeCircle")
+    //     .attr("r", function (d) {
+    //         // set the radius if matches larger : otherwise default to X
+    //         return d.matched_size > 0 ? Math.min(4.5 + Math.sqrt(d.matched_size), 20) : 4.5;
+    //     })
+    //     .style("fill", function (d) {
+    //         // set fill color depending on matches and children
+    //         var matches = d.matched_size
+    //         if (matches > 0) {
+    //             return d._children ? "goldenrod" : "gold";
+    //         } else {
+    //             return d._children ? "lightsteelblue" : "#fff";
+    //         }
+    //         return d._children ? "lightsteelblue" : "#fff";
+    //     });
+    node.select("circle.nodeCircle")
+        .attr("r", function (d) {
+            // set the radius if matches larger : otherwise default to X
+            return calcRadius(d.matched_size);
+        })
+        .style("fill", function (d) {
+            // set fill color depending on matches and children
+            var matches = d.matched_size
+            if (matches > 0) {
+                return matchColor;
+            } else {
+                return d._children ? hasChildrenColor : noChildrenColor;
+            }
+        })
+    // .selectAll("path")
+    // .data(function (d, i) {
+    //     let occurrenceFraction = d.occurrence_fraction;
+    //     return pie([occurrenceFraction, 1.0 - occurrenceFraction]);
+    // })
+    // .enter()
+    // .append("svg:path")
+    // .attr("d", arc)
+    // .attr("fill", function (d, i) {
+    //     return pieColors[i];
+    // })
+    ;
+
+    // Transition nodes to their new position.
+    var nodeUpdate = node.transition()
+        .duration(duration)
+        .attr("transform", function (d) {
+            return "translate(" + d.y + "," + d.x + ")";
+        });
+
+    // Fade the text in
+    nodeUpdate.select("text")
+        .style("fill-opacity", 1);
+
+    nodeUpdate.select("g circle path")
+        .attr("d", function (d) {
+            return d3.svg.arc().outerRadius(calcRadius(d.data.matched_size))(d);
+        })
+        .attr("fill", function (d, i) {
+            return pieColors[i];
+        });
+
+    // Transition exiting nodes to the parent's new position.
+    var nodeExit = node.exit().transition()
+        .duration(duration)
+        .attr("transform", function (d) {
+            return "translate(" + source.y + "," + source.x + ")";
+        })
+        .remove();
+
+    nodeExit.select("circle")
+        .attr("r", 0);
+
+    nodeExit.select("text")
+        .style("fill-opacity", 0);
+
+    // Update the links…
+    var link = svgGroup.selectAll("path.link")
+        .data(links, function (d) {
+            return d.target.id;
+        });
+
+    // Enter any new links at the parent's previous position.
+    link.enter().insert("path", "g")
+        .attr("class", "link")
+        .attr("d", function (d) {
+            var o = {
+                x: source.x0,
+                y: source.y0
+            };
+            return diagonal({
+                source: o,
+                target: o
+            });
+        });
+
+    // Transition links to their new position.
+    link.transition()
+        .duration(duration)
+        .attr("d", diagonal);
+
+    // Transition exiting nodes to the parent's new position.
+    link.exit().transition()
+        .duration(duration)
+        .attr("d", function (d) {
+            var o = {
+                x: source.x,
+                y: source.y
+            };
+            return diagonal({
+                source: o,
+                target: o
+            });
+        })
+        .remove();
+
+    // Stash the old positions for transition.
+    nodes.forEach(function (d) {
+        d.x0 = d.x;
+        d.y0 = d.y;
+    });
+}
+
+
+function collapseAll() {
+    visitAll(root, collapse);
+}
+
+// A recursive helper function for performing some setup by walking through all nodes
+
+function visit(parent, visitFn, childrenFn) {
+    if (!parent) return;
+
+    visitFn(parent);
+
+    var children = childrenFn(parent);
+    if (children) {
+        var count = children.length;
+        for (var i = 0; i < count; i++) {
+            visit(children[i], visitFn, childrenFn);
+        }
+    }
+}
+
+function visitAll(parent, visitFn) {
+    visit(parent, visitFn, getAllChildren);
+}
+
+function visitAllToLevel(parent, level, visitFn, visitAfterLevelFn) {
+    visitToLevel(parent, level, visitFn, visitAfterLevelFn, getAllChildren);
+}
+
+function visitToLevel(parent, level, visitFn, visitAfterLevelFn, childrenFn) {
+    if (!parent) return;
+
+    if (level > 0) {
+        visitFn(parent);
+    } else {
+        visitAfterLevelFn(parent);
+    }
+    var children = childrenFn(parent);
+    if (children) {
+        var count = children.length;
+        for (var i = 0; i < count; i++) {
+            visitToLevel(children[i], (level - 1), visitFn, visitAfterLevelFn, childrenFn);
+        }
+    }
+}
+
+// get all children of parent
+function getAllChildren(parent) {
+    if (parent.children && parent.children.length > 0) {
+        return parent.children;
+    }
+    if (parent._children && parent._children.length > 0) {
+        return parent._children;
+    }
+    return null;
+}
+
+// sort the tree according to the node names
+function sortTree() {
+    tree.sort(function (a, b) {
+        return b.name.toLowerCase() < a.name.toLowerCase() ? 1 : -1;
+    });
+}
+
+// true if node has group_size>0 (matches)
+function hasMatches(node) {
+    return node.matched_size > 0;
+}
+
+// true if node has group_size>0 (matches)
+function hasNoMatches(node) {
+    return !hasMatches(node);
+}
+
+/**
+ * Collapse the node and all it's children
+ * @param node a node and its children
+ * @param predicate a function to define if nodes should be collapsed (true) or shown (false). predicate should
+ * take a node
+ */
+function expandAllMatches(node) {
+    if (hasMatches(node)) {
+        expand(node)
+    } else {
+        collapse(node)
+    }
+}
+
+
+function collapseToLevel(level) {
+    visitAllToLevel(root, level, expand, collapse);
+}
+
+// Helper functions for collapsing and expanding nodes.
+function collapse(d) {
+    if (d.children) {
+        d._children = d.children;
+        d._children.forEach(collapse);
+        d.children = null;
+    }
+}
+
+function expand(d) {
+    if (d._children) {
+        d.children = d._children;
+        d.children.forEach(expand);
+        d._children = null;
+    }
+}
+
+// Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
+function centerNode(source) {
+    scale = zoomListener.scale();
+    x = -source.y0;
+    y = -source.x0;
+    x = x * scale + viewerWidth / 2;
+    y = y * scale + viewerHeight / 2;
+    d3.select('g').transition()
+        .duration(duration)
+        .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+    zoomListener.scale(scale);
+    zoomListener.translate([x, y]);
+}
+
+// Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
+function centerLeftNode(source) {
+    scale = zoomListener.scale();
+    x = -source.y0;
+    y = -source.x0;
+    x = x * scale + 40;
+    y = y * scale + viewerHeight / 2;
+    d3.select('g').transition()
+        .duration(duration)
+        .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+    zoomListener.scale(scale);
+    zoomListener.translate([x, y]);
+}
+
+// Toggle children function
+function toggleChildren(d) {
+    if (d.children) {
+        d._children = d.children;
+        d.children = null;
+    } else if (d._children) {
+        d.children = d._children;
+        d._children = null;
+    }
+    return d;
+}
