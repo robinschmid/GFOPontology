@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style type="text/css">
+
+    .node {
+        cursor: pointer;
+    }
+
+    .overlay {
+        background-color: white;
+    }
+
+    .node circle {
+        fill: #fff;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
+
+    .node text {
+        font-size: 10px;
+        font-family: sans-serif;
+    }
+
+    .link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 1.5px;
+    }
+
+    .templink {
+        fill: none;
+        stroke: #ff0000;
+        stroke-width: 3px;
+    }
+
+    .ghostCircle.show {
+        display: block;
+    }
+
+    .ghostCircle, .activeDrag .ghostCircle {
+        display: none;
+    }
+
+    div.tooltip {
+        position: absolute;
+        text-align: left;
+        padding: 2px;
+        font: 12px sans-serif;
+        background: lightsteelblue;
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+
+</style>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://robinschmid.github.io/GFOPontology/code/collapsible_tree_v2.js"></script>
+<body>
+<input type="button" value="Collapse" onclick="collapseAllAndUpdate()"/>
+<input type="button" value="Expand matched" onclick="expandMatchedAndUpdate()"/>
+<input type="button" value="Expand" onclick="expandAllAndUpdate()"/>
+<input type="button" value="Scale" onclick="toggleScalingAndUpdate()"/>
+<!-- Style combobox - placeholder will be filled by d3 -->
+<div id="styleCombo"></div>
+<div id="tree-container"></div>
+</body>
+</html>
