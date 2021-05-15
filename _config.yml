@@ -1,0 +1,11 @@
+theme: jekyll-theme-slate
+
+title: GFOP
+description: The Global Food-Omics
+show_downloads: true 
+
+github:
+  repository_url: https://github.com/ka-west/GFOPontology
+#  zip_url: https://github.com/tattoo-analysis/tattoo_pigments_spectral_libraries/archive/master.zip
+  owner_url: https://github.com/ka-west/
+  owner_name: Kiana West
