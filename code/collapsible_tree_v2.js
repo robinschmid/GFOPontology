@@ -143,56 +143,31 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
 
             console.log("Applying results to nodes");
             // add MASST data to nodes
-            applyMasstResults(treeData, rows);
+            visitAll(treeData, function (child) {
+                applyMasstResults(child, rows);
+            });
 
             // apply results to all nodes
             function applyMasstResults(node, results) {
-                // parse: group_size	group_value matched_size	metadata_column	occurrence_fraction
-                // sum results for all children (collapsed and non collapsed)
-                var group_size_sum = 0;
-                var matched_size_sum = 0;
-
-                // add values for all children (hidden and shown)
-                const values = applyMasstResultsChildren(node, results);
-                group_size_sum += values[0];
-                matched_size_sum += values[1];
-
                 // find match in results for this node and add to values
                 const found = results.find(row => row.group_value === node.name)
                 if (found) {
-                    group_size_sum += found.group_size
-                    matched_size_sum += found.matched_size
+                    node.group_size = found.group_size;
+                    node.matched_size = found.matched_size;
+                    node.occurrence_fraction = found.occurrence_fraction;
+                } else {
+                    node.group_size = 0;
+                    node.matched_size = 0;
+                    node.occurrence_fraction = 0;
                 }
                 // add pie dataset for convenience [matched data, rest]
                 node.pie_data = [{}, {}];
-                node.pie_data[0].matched_size = matched_size_sum;
-                node.pie_data[0].occurrence_fraction = matched_size_sum / group_size_sum;
+                node.pie_data[0].matched_size = node.matched_size;
+                node.pie_data[0].occurrence_fraction = node.occurrence_fraction;
                 node.pie_data[0].index = 0;
-                node.pie_data[1].matched_size = matched_size_sum;
-                node.pie_data[1].occurrence_fraction = 1.0 - matched_size_sum / group_size_sum;
+                node.pie_data[1].matched_size = node.matched_size;
+                node.pie_data[1].occurrence_fraction = 1.0 - node.occurrence_fraction;
                 node.pie_data[1].index = 1;
-
-                // set to node
-                node.group_size = group_size_sum;
-                node.matched_size = matched_size_sum;
-                node.occurrence_fraction = matched_size_sum / group_size_sum;
-
-                return [group_size_sum, matched_size_sum];
-            }
-
-            // apply to all children
-            function applyMasstResultsChildren(node, results) {
-                var group_size_sum = 0;
-                var matched_size_sum = 0;
-
-                if (node.children) {
-                    for (child of node.children) {
-                        const values = applyMasstResults(child, results);
-                        group_size_sum += values[0];
-                        matched_size_sum += values[1];
-                    }
-                }
-                return [group_size_sum, matched_size_sum];
             }
 
             // initialize drop down style menu
@@ -531,8 +506,9 @@ function click(d) {
 }
 
 function formatDecimals(value, decimals) {
-    return Number(Math.round(value +'e'+ decimals) +'e-'+ decimals).toFixed(decimals);
+    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals).toFixed(decimals);
 }
+
 function formatDecimals2(value, decimals) {
     return Number(value).toFixed(decimals);
 }
