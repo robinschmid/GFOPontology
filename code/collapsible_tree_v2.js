@@ -530,6 +530,13 @@ function click(d) {
     centerNode(d);
 }
 
+function formatDecimals(value, decimals) {
+    return Number(Math.round(value +'e'+ decimals) +'e-'+ decimals).toFixed(decimals);
+}
+function formatDecimals2(value, decimals) {
+    return Number(value).toFixed(decimals);
+}
+
 // update view
 function update(source) {
     // Compute the new height, function counts total children of root node and sets tree height accordingly.
@@ -584,7 +591,7 @@ function update(source) {
                 // show mouse over tooltip. Just for the fun count the clicks in the click method
                 "Name: " + d.name
                 + (d.matched_size > 0 ? "<br/>Matches: " + d.matched_size : "")
-                + (d.occurrence_fraction > 0 ? "<br/>Occurance fraction: " + d.occurrence_fraction : "")
+                + (d.occurrence_fraction > 0 ? "<br/>Occurance fraction: " + formatDecimals(d.occurrence_fraction, 3) : "")
                 + (d.group_size > 0 ? "<br/>Group size: " + d.group_size : "")
             )
                 .style("left", (d3.event.pageX) + "px")
