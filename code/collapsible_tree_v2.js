@@ -116,6 +116,20 @@ function toggleScalingAndUpdate() {
     }
 }
 
+/**
+ * Add pie data to node for cooccurence_fraction
+ * @param node
+ */
+function addPieDataToNode(node) {
+    // add pie dataset for convenience [matched data, rest]
+    node.pie_data = [{}, {}];
+    node.pie_data[0].matched_size = node.matched_size;
+    node.pie_data[0].occurrence_fraction = node.occurrence_fraction;
+    node.pie_data[0].index = 0;
+    node.pie_data[1].matched_size = node.matched_size;
+    node.pie_data[1].occurrence_fraction = 1.0 - node.occurrence_fraction;
+    node.pie_data[1].index = 1;
+}
 
 /**
  * The actual code to create the tree
@@ -143,11 +157,21 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
 
             console.log("Applying results to nodes");
             // add MASST data to nodes
-            visitAll(treeData, function (child) {
+            visitAll(treeData,function (child) {
                 applyMasstResults(child, rows);
             });
 
-            // apply results to all nodes
+            // calculate total matches for tree root by summing its direct children
+            treeData.group_size = 0;
+            treeData.matched_size = 0;
+            getAllChildren(treeData).forEach(child => {
+                treeData.group_size += child.group_size;
+                treeData.matched_size += child.matched_size;
+            });
+            treeData.occurrence_fraction = treeData.matched_size / treeData.group_size;
+            addPieDataToNode(treeData);
+
+            // apply results to all node
             function applyMasstResults(node, results) {
                 // find match in results for this node and add to values
                 const found = results.find(row => row.group_value === node.name)
@@ -160,14 +184,7 @@ treeJSON = d3.json(gfopOntologyFile, function (error, treeData) {
                     node.matched_size = 0;
                     node.occurrence_fraction = 0;
                 }
-                // add pie dataset for convenience [matched data, rest]
-                node.pie_data = [{}, {}];
-                node.pie_data[0].matched_size = node.matched_size;
-                node.pie_data[0].occurrence_fraction = node.occurrence_fraction;
-                node.pie_data[0].index = 0;
-                node.pie_data[1].matched_size = node.matched_size;
-                node.pie_data[1].occurrence_fraction = 1.0 - node.occurrence_fraction;
-                node.pie_data[1].index = 1;
+                addPieDataToNode(node);
             }
 
             // initialize drop down style menu
