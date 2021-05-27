@@ -26,7 +26,7 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 
 // the data
-const jsonOntologyFile = "https://raw.githubusercontent.com/robinschmid/GFOPontology/master/code/canopus_classyfire/classyfire.json";
+const jsonOntologyFile = "https://raw.githubusercontent.com/robinschmid/GFOPontology/master/code/canopus_classyfire/classyfire_ontology.json";
 const canopusResultsFile =
     "https://raw.githubusercontent.com/robinschmid/GFOPontology/master/code/canopus_classyfire/canopus_summary_adducts.tsv";
 
@@ -137,12 +137,6 @@ function addPieDataToNode(node) {
 treeJSON = d3.json(jsonOntologyFile, function (error, treeData) {
     if (error) return console.warn(error);
 
-    // add children
-    for (var i = 0; i < treeData.length; i++) {
-        node = treeData[i];
-        node.parent
-    }
-
     // read masst results and reflect to nodes
     readMasstResults(canopusResultsFile, treeData);
 
@@ -152,11 +146,11 @@ treeJSON = d3.json(jsonOntologyFile, function (error, treeData) {
         d3.tsv(fileOrUrl, function (d) {
             return {
                 // parse: group_size	group_value matched_size	metadata_column	occurrence_fraction
-                group_size: +d.group_size, // convert to number
-                group_value: d.group_value,
-                matched_size: +d.matched_size, // convert to number
-                metadata_column: d.metadata_column,
-                occurrence_fraction: +d.occurrence_fraction // convert to number
+                sample: d.name,
+                formula: d.molecularFormula,
+                precursor_formula: d.precursorFormula,
+                adduct: d.adduct,
+                class_name: d["most specific class"]
             };
         }, function (error, rows) {
             if (error) return console.warn(error);
