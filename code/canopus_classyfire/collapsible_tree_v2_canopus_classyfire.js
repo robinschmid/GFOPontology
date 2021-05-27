@@ -26,9 +26,9 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 
 // the data
-const jsonOntologyFile = "https://raw.githubusercontent.com/robinschmid/GFOPontology/master/data/GFOP.json";
+const jsonOntologyFile = "https://raw.githubusercontent.com/robinschmid/GFOPontology/master/code/canopus_classyfire/classyfire.json";
 const canopusResultsFile =
-    "https://raw.githubusercontent.com/robinschmid/GFOPontology/master/examples/caffeic_acid.tsv";
+    "https://raw.githubusercontent.com/robinschmid/GFOPontology/master/code/canopus_classyfire/canopus_summary_adducts.tsv";
 
 // turn off node dragging
 const isNodeDragActive = false;
@@ -137,6 +137,12 @@ function addPieDataToNode(node) {
 treeJSON = d3.json(jsonOntologyFile, function (error, treeData) {
     if (error) return console.warn(error);
 
+    // add children
+    for (var i = 0; i < treeData.length; i++) {
+        node = treeData[i];
+        node.parent
+    }
+
     // read masst results and reflect to nodes
     readMasstResults(canopusResultsFile, treeData);
 
@@ -157,7 +163,7 @@ treeJSON = d3.json(jsonOntologyFile, function (error, treeData) {
 
             console.log("Applying results to nodes");
             // add MASST data to nodes
-            visitAll(treeData,function (child) {
+            visitAll(treeData, function (child) {
                 applyMasstResults(child, rows);
             });
 
