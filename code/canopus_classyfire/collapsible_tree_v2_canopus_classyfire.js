@@ -33,6 +33,12 @@ const canopusResultsFile =
 // turn off node dragging
 const isNodeDragActive = false;
 
+// char width - distance between categories
+var charWidth = 6;
+
+// label font size
+var labelSize = 12;
+
 // base radius
 var isScalingActive = true;
 const maxRadius = 20;
@@ -116,6 +122,16 @@ function toggleScalingAndUpdate() {
     }
 }
 
+// define the character width -> space between classes
+d3.select("#inputCharWidth").on("input", function (d) {
+    setCharWidth(this.value);
+});
+
+// define font size
+d3.select("#inputFontSize").on("input", function (d) {
+    setLabelSize(this.value);
+});
+
 /**
  * Add pie data to node for cooccurence_fraction
  * @param node
@@ -142,6 +158,7 @@ treeJSON = d3.json(jsonOntologyFile, function (error, treeData) {
 
     // read masst results and add to tree
     function readCanopusResults(fileOrUrl, treeData) {
+
         // read results from food MASST tsv (tab-separated)
         d3.tsv(fileOrUrl, function (d) {
             return {
@@ -163,11 +180,21 @@ treeJSON = d3.json(jsonOntologyFile, function (error, treeData) {
 
             // calculate total matches for tree root by summing its direct children
             treeData.group_size = 0;
-            treeData.matched_size = 0;
-            getAllChildren(treeData).forEach(child => {
-                treeData.group_size += child.group_size;
-                treeData.matched_size += child.matched_size;
-            });
+            treeData.matched_size = propagateValues(treeData, "matched_size");
+
+
+            function propagateValues(node, variableName) {
+                var value = 0;
+
+                const children = getAllChildren(node);
+                if (children) {
+                    for (var i = 0; i < children.length; i++) {
+                        value += propagateValues(children[i], variableName);
+                    }
+                }
+                node[variableName] += value;
+                return node[variableName];
+            }
 
             // apply results to all node
             function applyCanopusResults(node, results) {
@@ -178,17 +205,16 @@ treeJSON = d3.json(jsonOntologyFile, function (error, treeData) {
                 node.precursor_formulas = "";
                 // find match in results for this node and add to values
                 results.forEach(row => {
-                    if(row.class_name === node.name) {
+                    if (row.class_name === node.name) {
                         node.matched_size++;
-                        if(node.matched_size === 1){
+                        if (node.matched_size === 1) {
                             node.samples = row.sample_name;
                             node.formulas = row.formula;
                             node.precursor_formulas = row.precursor_formula;
-                        }
-                        else {
-                            node.samples += ","+row.sample_name;
-                            node.formulas += ","+row.formula;
-                            node.precursor_formulas += ","+row.precursor_formula;
+                        } else {
+                            node.samples += "," + row.sample_name;
+                            node.formulas += "," + row.formula;
+                            node.precursor_formulas += "," + row.precursor_formula;
                         }
                     }
                 });
@@ -563,7 +589,7 @@ function update(source) {
 
     // Set widths between levels based on maxLabelLength.
     nodes.forEach(function (d) {
-        d.y = (d.depth * (maxLabelLength * 10)); //maxLabelLength * 10px
+        d.y = (d.depth * (maxLabelLength * charWidth)); //maxLabelLength * 10px
         // alternatively to keep a fixed scale one can set a fixed depth per level
         // Normalize for fixed-depth by commenting out below line
         // d.y = (d.depth * 500); //500px per level.
@@ -644,7 +670,8 @@ function update(source) {
         .text(function (d) {
             return d.name;
         })
-        .style("fill-opacity", 0);
+        .style("fill-opacity", 0)
+        .style("font-size", labelSize);
 
     // phantom node to give us mouseover in a radius around it
     nodeEnter.append("circle")
@@ -734,7 +761,8 @@ function update(source) {
 
     // Fade the text in
     nodeUpdate.select("text")
-        .style("fill-opacity", 1);
+        .style("fill-opacity", 1)
+        .style("font-size", labelSize);
 
     nodeUpdate.selectAll("path.nodePie")
         .attr("d", function (d) {
@@ -756,7 +784,8 @@ function update(source) {
         .attr("r", 0);
 
     nodeExit.select("text")
-        .style("fill-opacity", 0);
+        .style("fill-opacity", 0)
+        .style("font-size", labelSize);
 
     // Update the links…
     var link = svgGroup.selectAll("path.link")
@@ -955,4 +984,25 @@ function toggleChildren(d) {
         d._children = null;
     }
     return d;
+}
+
+
+function setLabelSize(value) {
+    if (labelSize === value)
+        return;
+    else {
+        console.log("Set label size to " + value);
+        labelSize = value;
+        update(root);
+    }
+}
+
+function setCharWidth(value) {
+    if (charWidth === value)
+        return;
+    else {
+        console.log("Set label size to " + value);
+        charWidth = value;
+        update(root);
+    }
 }
