@@ -138,15 +138,15 @@ treeJSON = d3.json(jsonOntologyFile, function (error, treeData) {
     if (error) return console.warn(error);
 
     // read masst results and reflect to nodes
-    readMasstResults(canopusResultsFile, treeData);
+    readCanopusResults(canopusResultsFile, treeData);
 
     // read masst results and add to tree
-    function readMasstResults(fileOrUrl, treeData) {
+    function readCanopusResults(fileOrUrl, treeData) {
         // read results from food MASST tsv (tab-separated)
         d3.tsv(fileOrUrl, function (d) {
             return {
                 // parse: group_size	group_value matched_size	metadata_column	occurrence_fraction
-                sample: d.name,
+                sample_name: d.name,
                 formula: d.molecularFormula,
                 precursor_formula: d.precursorFormula,
                 adduct: d.adduct,
@@ -158,7 +158,7 @@ treeJSON = d3.json(jsonOntologyFile, function (error, treeData) {
             console.log("Applying results to nodes");
             // add MASST data to nodes
             visitAll(treeData, function (child) {
-                applyMasstResults(child, rows);
+                applyCanopusResults(child, rows);
             });
 
             // calculate total matches for tree root by summing its direct children
@@ -168,23 +168,30 @@ treeJSON = d3.json(jsonOntologyFile, function (error, treeData) {
                 treeData.group_size += child.group_size;
                 treeData.matched_size += child.matched_size;
             });
-            treeData.occurrence_fraction = treeData.matched_size / treeData.group_size;
-            addPieDataToNode(treeData);
 
             // apply results to all node
-            function applyMasstResults(node, results) {
+            function applyCanopusResults(node, results) {
+                node.group_size = 0;
+                node.matched_size = 0;
+                node.samples = "";
+                node.formulas = "";
+                node.precursor_formulas = "";
                 // find match in results for this node and add to values
-                const found = results.find(row => row.group_value === node.name)
-                if (found) {
-                    node.group_size = found.group_size;
-                    node.matched_size = found.matched_size;
-                    node.occurrence_fraction = found.occurrence_fraction;
-                } else {
-                    node.group_size = 0;
-                    node.matched_size = 0;
-                    node.occurrence_fraction = 0;
-                }
-                addPieDataToNode(node);
+                results.forEach(row => {
+                    if(row.class_name === node.name) {
+                        node.matched_size++;
+                        if(node.matched_size === 1){
+                            node.samples = row.sample_name;
+                            node.formulas = row.formula;
+                            node.precursor_formulas = row.precursor_formula;
+                        }
+                        else {
+                            node.samples += ","+row.sample_name;
+                            node.formulas += ","+row.formula;
+                            node.precursor_formulas += ","+row.precursor_formula;
+                        }
+                    }
+                });
             }
 
             // initialize drop down style menu
