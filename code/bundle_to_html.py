@@ -21,6 +21,7 @@ def replace_by_local_file(path):
 
 def build_dist_html(input_html, output_html):
     """
+    Creates a single distributable HTML file.
     Reads the input_html and internalizes all CSS, JS, and data files into the output html. For web ressources: First
     try to load a local file, else try to download file.
     :param input_html: the input html file that defines all dependencies

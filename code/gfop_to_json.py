@@ -83,8 +83,8 @@ if __name__ == '__main__':
     # parsing the arguments (all optional)
     parser = argparse.ArgumentParser(description='Parse an input owl file to a json tree output. Input can be a path '
                                                  'or URL')
-    parser.add_argument('--input', type=str, help='input file', default="GFOP.owl")
-    parser.add_argument('--output', type=str, help='output file', default="GFOP.json")
+    parser.add_argument('--input', type=str, help='input file', default="../data/GFOP.owl")
+    parser.add_argument('--output', type=str, help='output file', default="../data/GFOP.json")
     parser.add_argument('--username', type=str, help='username for authentication if a url was passed to input',
                         default="")
     parser.add_argument('--password', type=str, help='password for authentication if a url was passed to input',
