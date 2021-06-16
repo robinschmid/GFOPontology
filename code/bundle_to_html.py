@@ -32,7 +32,7 @@ def replace_data_in_file(data_json_file, text):
     return text
 
 
-def build_dist_html(input_html, output_html, data_json_file = None, compress = False):
+def build_dist_html(input_html, output_html, data_json_file=None, compress=False):
     """
     Creates a single distributable HTML file.
     Reads the input_html and internalizes all CSS, JS, and data files into the output html. For web ressources: First
@@ -90,7 +90,6 @@ def build_dist_html(input_html, output_html, data_json_file = None, compress = F
             base64_file_content = base64.b64encode(file_content)
             tag['src'] = "data:image/png;base64, {}".format(base64_file_content.decode('ascii'))
 
-
     out_text = str(soup)
 
     if compress:
@@ -102,7 +101,6 @@ def build_dist_html(input_html, output_html, data_json_file = None, compress = F
             logger.warning("Error during output compression.")
             logger.exception(e)
 
-
     # Save onefile
     with open(output_html, "w", encoding="utf-8") as outfile:
         outfile.write(out_text)
@@ -112,12 +110,12 @@ if __name__ == '__main__':
     # parsing the arguments (all optional)
     parser = argparse.ArgumentParser(description='Parse an HTML file and all dependencies to create a single '
                                                  'distributable HTML file')
-    parser.add_argument('--input', type=str, help='The input html file',
+    parser.add_argument('--in_html', type=str, help='The input html file',
                         default="collapsible_tree_v3.html")
-    parser.add_argument('--data', type=str, help='replace tree data with this json file. Use '
-                                                 'json_ontology_extender.py to create a tree with data',
+    parser.add_argument('--in_data', type=str, help='replace tree data with this json file. Use '
+                                                    'json_ontology_extender.py to create a tree with data',
                         default="dist/merged_ontology_data.json")
-    parser.add_argument('--output', type=str, help='output html file', default="dist/oneindex.html")
+    parser.add_argument('--out_html', type=str, help='output html file', default="dist/oneindex.html")
     parser.add_argument('--compress', type=bool, help='Compress output file (needs minify_html)',
                         default=True)
     args = parser.parse_args()
@@ -126,7 +124,7 @@ if __name__ == '__main__':
     # something like https://raw.githubusercontent.com/robinschmid/GFOPontology/master/data/GFOP.owl
     # important use raw file on github!
     try:
-        build_dist_html(args.input, args.output, args.data, args.compress)
+        build_dist_html(args.in_html, args.out_html, args.in_data, args.compress)
     except Exception as e:
         # exit with error
         logger.exception(e)
@@ -134,4 +132,3 @@ if __name__ == '__main__':
 
     # exit with OK
     sys.exit(0)
-

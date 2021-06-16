@@ -64,18 +64,18 @@ def add_pie_data_to_node_and_children(node):
 
 
 def add_data_to_ontology_file(output="dist/merged_ontology_data.json", ontology_file="../data/GFOP.json",
-                              data_file="../examples/caffeic_acid.tsv", node_field="name", data_field="group_value",
-                              format_json_out=False):
+                              in_data="../examples/caffeic_acid.tsv", node_key="name", data_key="group_value",
+                              format_out_json=True):
     with open(ontology_file) as json_file:
         treeRoot = json.load(json_file)
 
         # read the additional data
-        df = pd.read_csv(data_file, sep='\t')
+        df = pd.read_csv(in_data, sep='\t')
 
         # print(df)
 
         # loop over all children
-        add_data_to_node(treeRoot, df, node_field, data_field)
+        add_data_to_node(treeRoot, df, node_key, data_key)
 
         # calc gfop specific data for root
         calc_root_stats(treeRoot)
@@ -84,7 +84,7 @@ def add_data_to_ontology_file(output="dist/merged_ontology_data.json", ontology_
 
         print("Writing to {}".format(output))
         with open(output, "w") as file:
-            if format_json_out:
+            if format_out_json:
                 out_tree = json.dumps(treeRoot, indent=2, cls=NpEncoder)
             else:
                 out_tree = json.dumps(treeRoot, cls=NpEncoder)
@@ -105,25 +105,25 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='merge an ontology with external data')
     parser.add_argument('--ontology', type=str, help='the json ontology file with children',
                         default="../data/GFOP.json")
-    parser.add_argument('--data', type=str, help='a tab separated file with additional data that is added to the '
-                                                 'ontology', default="../examples/caffeic_acid.tsv")
-    parser.add_argument('--node_field', type=str, help='the field in the ontology to be compare to the field in the '
-                                                       'data file', default="name")
-    parser.add_argument('--data_field', type=str,
+    parser.add_argument('--in_data', type=str, help='a tab separated file with additional data that is added to the '
+                                                    'ontology', default="../examples/caffeic_acid.tsv")
+    parser.add_argument('--node_key', type=str, help='the field in the ontology to be compare to the field in the '
+                                                     'data file', default="name")
+    parser.add_argument('--data_key', type=str,
                         help='the field in the data file to be compared to the field in the ontology',
                         default="group_value")
-    parser.add_argument('--output', type=str, help='output file', default="dist/merged_ontology_data.json")
+    parser.add_argument('--out_tree', type=str, help='output file', default="dist/merged_ontology_data.json")
     parser.add_argument('--format', type=bool, help='Format the json output False or True',
                         default=True)
+
     args = parser.parse_args()
 
     # is a url - try to download file
     # something like https://raw.githubusercontent.com/robinschmid/GFOPontology/master/data/GFOP.owl
     # important use raw file on github!
     try:
-        add_data_to_ontology_file(output=args.output, ontology_file=args.ontology, data_file=args.data,
-                                  node_field=args.node_field,
-                                  data_field=args.data_field, format_json_out=args.format)
+        add_data_to_ontology_file(output=args.out_tree, ontology_file=args.ontology, in_data=args.in_data,
+                                  node_key=args.node_key, data_key=args.data_key, format_out_json=args.format)
     except Exception as e:
         # exit with error
         logger.exception(e)
