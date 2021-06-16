@@ -1,12 +1,11 @@
 import argparse
-import os
 import sys
-import requests
-from anytree import Node, RenderTree
-from anytree.exporter import JsonExporter
 import pandas as pd
 import json
 import numpy as np
+import logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 
 class NpEncoder(json.JSONEncoder):
@@ -30,18 +29,33 @@ def add_data_to_node(node, df, node_field, data_field):
     :param data_field: data[field] determines the key to align tree and additional data
     """
     try:
-        rowi = df[df[data_field] == node[node_field]].index[0]
-        if rowi >= 0:
+        filtered = df[df[data_field] == node[node_field]]
+        if len(filtered) > 0:
+            rowi = filtered.index[0]
             for col, value in df.iteritems():
                 if col != data_field:
                     # print("%s is %s" % (col, value[rowi]))
                     node[col] = value[rowi]
     except Exception as ex:
-        print(ex)
+        logger.exception(ex)
     # apply to all children
     if "children" in node:
         for child in node["children"]:
             add_data_to_node(child, df, node_field, data_field)
+
+
+def add_pie_data_to_node_and_children(node):
+    # the pie data needs an array with multiple entries - therefore use fraction and 1-fraction
+    node["pie_data"] = [{}, {}];
+    node["pie_data"][0]["occurrence_fraction"] = node["occurrence_fraction"];
+    node["pie_data"][0]["index"] = 0;
+    node["pie_data"][1]["occurrence_fraction"] = 1.0 - node["occurrence_fraction"];
+    node["pie_data"][1]["index"] = 1;
+
+    # apply to all children
+    if "children" in node:
+        for child in node["children"]:
+            add_pie_data_to_node_and_children(child)
 
 
 def add_data_to_ontology_file(output="dist/merged_ontology_data.json", ontology_file="../data/GFOP.json",
@@ -49,7 +63,7 @@ def add_data_to_ontology_file(output="dist/merged_ontology_data.json", ontology_
                               format_json_out=False):
     # read owl file and cache all nodes in a dict{name, node}
     with open(ontology_file) as json_file:
-        tree = json.load(json_file)
+        treeRoot = json.load(json_file)
 
         # read the additional data
         df = pd.read_csv(data_file, sep='\t')
@@ -57,15 +71,29 @@ def add_data_to_ontology_file(output="dist/merged_ontology_data.json", ontology_
         # print(df)
 
         # loop over all children
-        add_data_to_node(tree, df, node_field, data_field)
+        add_data_to_node(treeRoot, df, node_field, data_field)
+
+        # calc gfop specific data for root
+        calc_root_stats(treeRoot)
+        # add data in format for pie charts
+        add_pie_data_to_node_and_children(treeRoot)
 
         print("Writing to {}".format(output))
         with open(output, "w") as file:
             if format_json_out:
-                out_tree = json.dumps(tree, indent=2, cls=NpEncoder)
+                out_tree = json.dumps(treeRoot, indent=2, cls=NpEncoder)
             else:
-                out_tree = json.dumps(tree, cls=NpEncoder)
+                out_tree = json.dumps(treeRoot, cls=NpEncoder)
             print(out_tree, file=file)
+
+
+def calc_root_stats(treeRoot):
+    treeRoot["group_size"] = 0
+    treeRoot["matched_size"] = 0
+    for child in treeRoot["children"]:
+        treeRoot["group_size"] += child["group_size"]
+        treeRoot["matched_size"] += child["matched_size"]
+    treeRoot["occurrence_fraction"] = treeRoot["matched_size"] / treeRoot["group_size"]
 
 
 if __name__ == '__main__':
@@ -83,7 +111,7 @@ if __name__ == '__main__':
                         default="group_value")
     parser.add_argument('--output', type=str, help='output file', default="dist/merged_ontology_data.json")
     parser.add_argument('--format', type=bool, help='Format the json output False or True',
-                        default=False)
+                        default=True)
     args = parser.parse_args()
 
     # is a url - try to download file
@@ -95,7 +123,7 @@ if __name__ == '__main__':
                                   data_field=args.data_field, format_json_out = args.format)
     except Exception as e:
         # exit with error
-        print(e)
+        logger.exception(e)
         sys.exit(1)
 
     # exit with OK
