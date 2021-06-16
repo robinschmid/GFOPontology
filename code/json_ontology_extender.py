@@ -4,6 +4,7 @@ import pandas as pd
 import json
 import numpy as np
 import logging
+
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
@@ -49,8 +50,12 @@ def add_pie_data_to_node_and_children(node):
     node["pie_data"] = [{}, {}];
     node["pie_data"][0]["occurrence_fraction"] = node["occurrence_fraction"];
     node["pie_data"][0]["index"] = 0;
+    node["pie_data"][0]["group_size"] = node["group_size"];
+    node["pie_data"][0]["matched_size"] = node["matched_size"];
     node["pie_data"][1]["occurrence_fraction"] = 1.0 - node["occurrence_fraction"];
     node["pie_data"][1]["index"] = 1;
+    node["pie_data"][1]["group_size"] = node["group_size"];
+    node["pie_data"][1]["matched_size"] = node["matched_size"];
 
     # apply to all children
     if "children" in node:
@@ -61,7 +66,6 @@ def add_pie_data_to_node_and_children(node):
 def add_data_to_ontology_file(output="dist/merged_ontology_data.json", ontology_file="../data/GFOP.json",
                               data_file="../examples/caffeic_acid.tsv", node_field="name", data_field="group_value",
                               format_json_out=False):
-    # read owl file and cache all nodes in a dict{name, node}
     with open(ontology_file) as json_file:
         treeRoot = json.load(json_file)
 
@@ -98,8 +102,7 @@ def calc_root_stats(treeRoot):
 
 if __name__ == '__main__':
     # parsing the arguments (all optional)
-    parser = argparse.ArgumentParser(description='Parse an input owl file to a json tree output. Input can be a path '
-                                                 'or URL')
+    parser = argparse.ArgumentParser(description='merge an ontology with external data')
     parser.add_argument('--ontology', type=str, help='the json ontology file with children',
                         default="../data/GFOP.json")
     parser.add_argument('--data', type=str, help='a tab separated file with additional data that is added to the '
@@ -120,7 +123,7 @@ if __name__ == '__main__':
     try:
         add_data_to_ontology_file(output=args.output, ontology_file=args.ontology, data_file=args.data,
                                   node_field=args.node_field,
-                                  data_field=args.data_field, format_json_out = args.format)
+                                  data_field=args.data_field, format_json_out=args.format)
     except Exception as e:
         # exit with error
         logger.exception(e)
