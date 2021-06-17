@@ -34,11 +34,14 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 
 const root = PLACEHOLDER_JSON_DATA;
 
+visitAll(root, node => node.originalChildren = node.children);
+
 // turn off node dragging
 const isNodeDragActive = false;
 
 // char width - distance between categories
 var charWidth = 6;
+var lineHeight = 40;
 
 // label font size
 var labelSize = 12;
@@ -47,6 +50,9 @@ var labelSize = 12;
 var isScalingActive = true;
 const maxRadius = 20;
 var radius = 6;
+
+// only show matched nodes by default
+var isFilterMatched = true;
 
 // colors
 var lineColor = "#ccc";
@@ -125,9 +131,22 @@ function toggleScalingAndUpdate() {
     }
 }
 
+function toggleFilterMatched() {
+    if (root) {
+        isFilterMatched = !isFilterMatched;
+        visitAll(root, filterMatched)
+
+        update(root);
+        centerLeftNode(root);
+    }
+}
+
 // define the character width -> space between classes
 d3.select("#inputCharWidth").on("input", function (d) {
     setCharWidth(this.value);
+});
+d3.select("#inputHeight").on("input", function (d) {
+    setLineHeight(this.value);
 });
 
 // define font size
@@ -254,6 +273,11 @@ function pan(domNode, direction) {
 
 // Define the zoom function for the zoomable tree
 function zoom() {
+    // var scale = Math.pow(d3.event.scale, .1);
+    // var translateY = (viewerHeight - (viewerHeight * scale)) / 2;
+    // var translateX = (viewerWidth - (viewerWidth * scale)) / 2;
+    // svgGroup.attr("transform", "translate(" + [translateX, translateY] + ")" + " scale(" + scale + ")");
+
     svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
@@ -466,7 +490,8 @@ svgGroup = baseSvg.append("g");
 root.x0 = viewerHeight / 2;
 root.y0 = 0;
 
-visitAll(root, expandAllMatches)
+// visitAll(root, expandAllMatches)
+visitAll(root, filterMatched);
 // Layout the tree initially and center left on the root node.
 update(root);
 centerLeftNode(root);
@@ -513,7 +538,7 @@ function update(source) {
         }
     };
     childCount(0, root);
-    var newHeight = d3.max(levelWidth) * 30; // 25 pixels per line
+    var newHeight = d3.max(levelWidth) * lineHeight; // 25 pixels per line
     tree = tree.size([newHeight, viewerWidth]);
 
     // Compute the new tree layout.
@@ -868,6 +893,7 @@ function collapse(d) {
         d._children = d.children;
         d._children.forEach(collapse);
         d.children = null;
+        d.collapsed = true;
     }
 }
 
@@ -876,6 +902,28 @@ function expand(d) {
         d.children = d._children;
         d.children.forEach(expand);
         d._children = null;
+        d.collapsed = false;
+    }
+}
+
+function filterMatched(d) {
+    if (typeof d.originalChildren !== 'undefined' && d.originalChildren.length > 0) {
+        // set original children to children
+        if (d.collapsed) d._children = d.originalChildren;
+        else d.children = d.originalChildren;
+        d.filteredChildren = null;
+    }
+
+
+    if (isFilterMatched) {
+        if (d.children) {
+            d.filteredChildren = d.children.filter(child => !(child.matched_size > 0));
+            d.children = d.children.filter(child => child.matched_size > 0);
+        }
+        if (d._children) {
+            d.filteredChildren = d._children.filter(child => !(child.matched_size > 0));
+            d.children = d._children.filter(child => child.matched_size > 0);
+        }
     }
 }
 
@@ -936,6 +984,16 @@ function setCharWidth(value) {
     else {
         console.log("Set label size to " + value);
         charWidth = value;
+        update(root);
+    }
+}
+
+function setLineHeight(value) {
+    if (lineHeight === value)
+        return;
+    else {
+        console.log("Set line height to " + value);
+        lineHeight = value;
         update(root);
     }
 }
