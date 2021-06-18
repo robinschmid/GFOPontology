@@ -17,11 +17,11 @@ def replace_by_local_file(path):
     :return: a local file or the original input string
     """
     if path == "https://d3js.org/d3.v3.min.js":
-        return "src/d3.v3.min.js"
+        return "lib/d3.v3.min.js"
     if path == "https://d3js.org/d3.v6.min.js":
-        return "src/d3.v6.min.js"
+        return "lib/d3.v6.min.js"
     if path == "https://code.jquery.com/jquery-3.6.0.min.js":
-        return "src/jquery-3.6.0.min.js"
+        return "lib/jquery-3.6.0.min.js"
     return path
 
 
