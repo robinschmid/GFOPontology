@@ -45,6 +45,34 @@ def add_data_to_node(node, df, node_field, data_field):
             add_data_to_node(child, df, node_field, data_field)
 
 
+def accumulate_field_in_parents(node, field):
+    """
+    check count and group size fields and accumulate over tree
+    :param field: field to propagate
+    :param node: the current node in a tree structure with ["children"] property
+    """
+    node_value = node.get(field, 0)
+    # apply to all children
+    if "children" in node:
+        for child in node["children"]:
+            node_value += accumulate_field_in_parents(child, field)
+
+    return node_value
+
+
+def field_missing(node, field):
+    """
+    check if the node or any children down the tree lacks the field
+    :param field: the field to be searched
+    :param node: the current node in a tree structure with ["children"] property
+    """
+    if node.get(field, None) is None:
+        return True
+    if "children" in node:
+        for child in node["children"]:
+            field_missing(child, field)
+
+
 def add_pie_data_to_node_and_children(node):
     # the pie data needs an array with multiple entries - therefore use fraction and 1-fraction
     node["pie_data"] = [{}, {}];
@@ -76,6 +104,12 @@ def add_data_to_ontology_file(output="dist/merged_ontology_data.json", ontology_
 
         # loop over all children
         add_data_to_node(treeRoot, df, node_key, data_key)
+
+        # check if group_size is available otherwise propagate
+        if field_missing(treeRoot, "group_size"):
+            accumulate_field_in_parents(treeRoot, "group_size")
+        if field_missing(treeRoot, "matched_size"):
+            accumulate_field_in_parents(treeRoot, "matched_size")
 
         # calc gfop specific data for root
         calc_root_stats(treeRoot)
