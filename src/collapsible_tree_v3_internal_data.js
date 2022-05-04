@@ -40,7 +40,7 @@ visitAll(root, node => node.originalChildren = node.children);
 const isNodeDragActive = false;
 
 // char width - distance between categories
-var charWidth = 6;
+var charWidth = 2.4;
 var lineHeight = 40;
 
 // label font size
@@ -574,6 +574,7 @@ function update(source) {
             tooltipDiv.html(
                 // show mouse over tooltip. Just for the fun count the clicks in the click method
                 "Name: " + d.name
+                + (d.NCBI != null ? "<br/>NCBI: " + d.NCBI : "")
                 + (d.matched_size > 0 ? "<br/>Matches: " + d.matched_size : "")
                 + (d.occurrence_fraction > 0 ? "<br/>Occurance fraction: " + formatDecimals(d.occurrence_fraction, 3) : "")
                 + (d.group_size > 0 ? "<br/>Group size: " + d.group_size : "")
