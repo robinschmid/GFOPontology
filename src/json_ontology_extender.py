@@ -30,13 +30,17 @@ def add_data_to_node(node, df, node_field, data_field):
     :param data_field: data[field] determines the key to align tree and additional data
     """
     try:
-        filtered = df[df[data_field] == node[node_field]]
-        if len(filtered) > 0:
-            rowi = filtered.index[0]
-            for col, value in df.iteritems():
-                if col != data_field:
-                    # print("%s is %s" % (col, value[rowi]))
-                    node[col] = value[rowi]
+        ncbi = node.get(node_field)
+        if ncbi is None:
+            logger.warning("node has no id {}".format(node.get("name", "NONAME")))
+        else:
+            filtered = df[df[data_field] == ncbi]
+            if len(filtered) > 0:
+                rowi = filtered.index[0]
+                for col, value in df.iteritems():
+                    if col != data_field:
+                        # print("%s is %s" % (col, value[rowi]))
+                        node[col] = value[rowi]
     except Exception as ex:
         logger.exception(ex)
     # apply to all children
@@ -56,21 +60,28 @@ def accumulate_field_in_parents(node, field):
     if "children" in node:
         for child in node["children"]:
             node_value += accumulate_field_in_parents(child, field)
-
+    node[field] = node_value
     return node_value
 
 
-def field_missing(node, field):
+def field_missing(node, field, report_missing=False, replace_with_field=None):
     """
     check if the node or any children down the tree lacks the field
     :param field: the field to be searched
     :param node: the current node in a tree structure with ["children"] property
     """
+    missing = 0
     if node.get(field, None) is None:
-        return True
+        if report_missing:
+            logger.error("Missing: {}".format(node.get("name", "NONAME")))
+        if replace_with_field is not None:
+            node[field] = node.get(replace_with_field, "")
+        missing = 1
     if "children" in node:
         for child in node["children"]:
-            field_missing(child, field)
+            missing += field_missing(child, field)
+
+    return missing
 
 
 def add_pie_data_to_node_and_children(node):
@@ -106,10 +117,14 @@ def add_data_to_ontology_file(output="dist/merged_ontology_data.json", ontology_
         add_data_to_node(treeRoot, df, node_key, data_key)
 
         # check if group_size is available otherwise propagate
-        if field_missing(treeRoot, "group_size"):
+        if field_missing(treeRoot, "NCBI", report_missing=True, replace_with_field="name") > 0:
+            logger.error("NCBI id is missing in a node")
+        if field_missing(treeRoot, "group_size") > 0:
             accumulate_field_in_parents(treeRoot, "group_size")
-        if field_missing(treeRoot, "matched_size"):
+        if field_missing(treeRoot, "matched_size") > 0:
             accumulate_field_in_parents(treeRoot, "matched_size")
+
+        calc_stats(treeRoot)
 
         # calc gfop specific data for root
         calc_root_stats(treeRoot)
@@ -125,13 +140,27 @@ def add_data_to_ontology_file(output="dist/merged_ontology_data.json", ontology_
             print(out_tree, file=file)
 
 
+def calc_stats(node):
+    if "children" in node:
+        for child in node["children"]:
+            calc_stats(child)
+    if node["group_size"] == 0:
+        node["occurrence_fraction"] = 0
+    else:
+        node["occurrence_fraction"] = node["matched_size"] / node["group_size"]
+
+
 def calc_root_stats(treeRoot):
     treeRoot["group_size"] = 0
     treeRoot["matched_size"] = 0
     for child in treeRoot["children"]:
         treeRoot["group_size"] += child["group_size"]
         treeRoot["matched_size"] += child["matched_size"]
-    treeRoot["occurrence_fraction"] = treeRoot["matched_size"] / treeRoot["group_size"]
+
+    if treeRoot["group_size"] == 0:
+        treeRoot["occurrence_fraction"] = 0
+    else :
+        treeRoot["occurrence_fraction"] = treeRoot["matched_size"] / treeRoot["group_size"]
 
 
 if __name__ == '__main__':

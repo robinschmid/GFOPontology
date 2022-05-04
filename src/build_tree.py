@@ -57,7 +57,7 @@ if __name__ == '__main__':
     try:
         # tmp test microbe masst
         create_tree_html("collapsible_tree_v3.html", "../data/microbe_masst/ncbi.json",
-                         "../examples/yersiniabactin.tsv", args.out_tree, args.format, args.out_html, args.compress,
+                         "dist/microbe_masst_counts.tsv", args.out_tree, args.format, args.out_html, args.compress,
                          "NCBI", "ncbi")
         # create_tree_html(args.in_html, args.ontology, args.in_data, args.out_tree, args.format, args.out_html,
         #                  args.compress, args.node_key, args.data_key)
