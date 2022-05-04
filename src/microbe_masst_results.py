@@ -42,15 +42,12 @@ if __name__ == '__main__':
     parser.add_argument('--metadata_file', type=str, help='microbe masst metadata',
                         default="../data/microbe_masst/microbe_masst_table.csv")
     parser.add_argument('--masst_file', type=str, help='a tab separated file with additional data that is added to '
-                                                       'metadata file', default="../examples/yersiniabactin.tsv")
+                                                       'metadata file', default="../examples/phelylglycocholic_acid.tsv")
     parser.add_argument('--out_tsv_file', type=str, help='output file in .tsv format',
                         default="dist/microbe_masst_counts.tsv")
 
     args = parser.parse_args()
 
-    # is a url - try to download file
-    # something like https://raw.githubusercontent.com/robinschmid/GFOPontology/master/data/GFOP.owl
-    # important use raw file on github!
     try:
         create_counts_file(metadata_file=args.metadata_file, masst_file=args.masst_file, out_tsv_file=args.out_tsv_file)
     except Exception as e:
