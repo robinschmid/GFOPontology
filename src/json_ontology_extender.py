@@ -34,7 +34,8 @@ def add_data_to_node(node, df, node_field, data_field):
         if ncbi is None:
             logger.warning("node has no id {}".format(node.get("name", "NONAME")))
         else:
-            filtered = df[df[data_field] == ncbi]
+            # use string for comparison of IDs
+            filtered = df[df[data_field] == str(ncbi)]
             if len(filtered) > 0:
                 rowi = filtered.index[0]
                 for col, value in df.iteritems():
@@ -110,6 +111,8 @@ def add_data_to_ontology_file(output="dist/merged_ontology_data.json", ontology_
 
         # read the additional data
         df = pd.read_csv(in_data, sep='\t')
+        # ensure that the grouping columns are strings as we usually match string ids
+        df[data_key] = df[data_key].astype(str)
 
         # print(df)
 
