@@ -16,17 +16,17 @@ def run_microbe_masst(usi_or_lib_id, precursor_mz_tol=0.05, mz_tol=0.02, min_cos
                       out_json_tree="dist/merged_ncbi_ontology_data.json", format_out_json=True,
                       out_html="dist/oneindex.html", compress_out_html=True, node_key="NCBI", data_key="ncbi"
                       ):
-    matches = masst.fast_masst(usi_or_lib_id, precursor_mz_tol, mz_tol, min_cos)
-    match_usi_list = [match["USI"] for match in matches]
 
     try:
-        mmtree.create_tree_html(in_html, in_ontology, metadata_file, None, match_usi_list, out_counts_file,
-                         out_json_tree, format_out_json, out_html, compress_out_html, node_key, data_key)
+        matches = masst.fast_masst(usi_or_lib_id, precursor_mz_tol, mz_tol, min_cos)
+        if (matches is not None) and (len(matches)>0):
+            match_usi_list = [match["USI"] for match in matches]
+            mmtree.create_tree_html(in_html, in_ontology, metadata_file, None, match_usi_list, out_counts_file,
+                             out_json_tree, format_out_json, out_html, compress_out_html, node_key, data_key)
 
     except Exception as e:
         # exit with error
         logger.exception(e)
-        sys.exit(1)
 
 if __name__ == '__main__':
     # parsing the arguments (all optional)

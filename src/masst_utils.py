@@ -29,7 +29,7 @@ def fast_masst(usi_or_lib_id, precursor_mz_tol=0.05, mz_tol=0.02, min_cos=0.7):
             .format(usi_or_lib_id, precursor_mz_tol, mz_tol, min_cos)
         # search_api_url = "https://fastlibrarysearch.ucsd.edu/search?usi={}&library=massivekb_index&analog=No".format(
         #     usi)
-        search_api_response = requests.get(search_api_url, timeout=20)
+        search_api_response = requests.get(search_api_url, timeout=50)
         search_api_response_json = search_api_response.json()
         matches = search_api_response_json["results"]
         return matches

@@ -1,6 +1,7 @@
 import sys
 import logging
 import csv
+import pandas as pd
 
 import microbe_masst as micromasst
 
@@ -34,8 +35,39 @@ if __name__ == '__main__':
         "CCMSLIB00000075066": "arylomycin_a4",
         "CCMSLIB00005772087": "kanamycin_a",
         "CCMSLIB00005464333": "PANTOTHENATE",
-        "CCMSLIB00005723628": "acyl_ferrioxamine_2"
+        "CCMSLIB00005723628": "acyl_ferrioxamine_2",
+        "CCMSLIB00000072229": "PQS",
+        "CCMSLIB00000072137": "NHQ",
+        "CCMSLIB00000072038": "putative quinolone",
+        "CCMSLIB00003136275": "lovastatin",
+        "CCMSLIB00005435739": "lovastatin_2",
+        "CCMSLIB00004679270": "peptaibol",
+        "CCMSLIB00003134635": "azithromycin",
+        "CCMSLIB00000579271": "Surugamide A",
+        "CCMSLIB00000001621": "Desferrioxamine E",
+        "CCMSLIB00000072100": "Desferrioxamine B",
+        "CCMSLIB00005716848": "Acyl_Desferrioxamine_C13_Promicroferrioxamine",
+        "CCMSLIB00003739952": "Penicillin G",
+        "CCMSLIB00005435755": "Ferrichrome",
+        "CCMSLIB00000070253": "Barbamide",
+        "CCMSLIB00000001562": "Jamaicamide A",
+        "CCMSLIB00000075016": "Napsamycin",
+        "CCMSLIB00001059079": "triacylfusarin",
+        "CCMSLIB00000074975": "Fusarin A",
+        "CCMSLIB00004721498": "Polymyxin B",
+        "CCMSLIB00005732667": "Microcystin LR",
+        "CCMSLIB00000005120": "Mycophenolic",
+        "CCMSLIB00005755738": "Mycotoxin F2",
+        "CCMSLIB00005723573": "Beauvericin",
+        "CCMSLIB00005727552": "Beauvericin_2"
     }
+
+    finished_jobs_tsv = "../examples/example_links.tsv"
+
+    finsihed_jobs_df = pd.read_csv(finished_jobs_tsv, sep="\t")
+
+    # TODO check which jobs already finished
+
     links = []
     for usi_or_lib_id, compound_name in jobs.items():
         run_job(usi_or_lib_id, compound_name)
@@ -43,7 +75,7 @@ if __name__ == '__main__':
 
     sep = "\t"
     header = ["ID", "Compound", "Tree"]
-    with open('../examples/example_links.tsv', 'w', newline='', encoding='utf-8') as f:
+    with open(finished_jobs_tsv, 'w', newline='', encoding='utf-8') as f:
         write = csv.writer(f)
         write.writerow(header)
         for row in links:

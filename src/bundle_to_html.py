@@ -105,6 +105,8 @@ def build_dist_html(input_html, output_html, data_json_file=None, compress=False
     with open(output_html, "w", encoding="utf-8") as outfile:
         outfile.write(out_text)
 
+    return True
+
 
 if __name__ == '__main__':
     # parsing the arguments (all optional)
