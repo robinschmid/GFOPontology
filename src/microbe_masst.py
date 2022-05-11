@@ -9,6 +9,7 @@ import build_microbe_masst_tree as mmtree
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
+
 def run_microbe_masst(usi_or_lib_id, precursor_mz_tol=0.05, mz_tol=0.02, min_cos=0.7,
                       in_html="collapsible_tree_v3.html", in_ontology="../data/microbe_masst/ncbi.json",
                       metadata_file="../data/microbe_masst/microbe_masst_table.csv",
@@ -16,26 +17,29 @@ def run_microbe_masst(usi_or_lib_id, precursor_mz_tol=0.05, mz_tol=0.02, min_cos
                       out_json_tree="dist/merged_ncbi_ontology_data.json", format_out_json=True,
                       out_html="dist/oneindex.html", compress_out_html=True, node_key="NCBI", data_key="ncbi"
                       ):
-
     try:
         matches = masst.fast_masst(usi_or_lib_id, precursor_mz_tol, mz_tol, min_cos)
-        if (matches is not None) and (len(matches)>0):
+        if (matches is not None) and (len(matches) > 0):
             match_usi_list = [match["USI"] for match in matches]
             mmtree.create_tree_html(in_html, in_ontology, metadata_file, None, match_usi_list, out_counts_file,
-                             out_json_tree, format_out_json, out_html, compress_out_html, node_key, data_key)
-
+                                    out_json_tree, format_out_json, out_html, compress_out_html, node_key, data_key)
+            return matches
     except Exception as e:
         # exit with error
         logger.exception(e)
+    # default return None
+    return None
+
 
 if __name__ == '__main__':
     # parsing the arguments (all optional)
     parser = argparse.ArgumentParser(description='Create tree data by merging extra data into an ontology. Then '
                                                  'create a distributable html file that internalizes all scripts, '
                                                  'data, etc. ')
-    parser.add_argument('--usi_or_lib_id', type=str, help='universal spectrum identifier or GNPS library ID to search by fastMASST',
+    parser.add_argument('--usi_or_lib_id', type=str,
+                        help='universal spectrum identifier or GNPS library ID to search by fastMASST',
                         default="mzspec:GNPS:GNPS-LIBRARY:accession:CCMSLIB00005883671")
-                        # default="mzspec:GNPS:GNPS-LIBRARY:accession:CCMSLIB00000001556")
+    # default="mzspec:GNPS:GNPS-LIBRARY:accession:CCMSLIB00000001556")
     parser.add_argument('--in_html', type=str, help='The input html file',
                         default="collapsible_tree_v3.html")
     parser.add_argument('--ontology', type=str, help='the json ontology file with children',
@@ -63,9 +67,9 @@ if __name__ == '__main__':
     # important use raw file on github!
     try:
         run_microbe_masst(args.usi_or_lib_id, 0.05, 0.02, 0.7,
-            # tree generation
-            args.in_html, args.ontology, args.metadata_file, args.out_counts_file,
-                         args.out_tree, args.format, args.out_html, args.compress, args.node_key, args.data_key)
+                          # tree generation
+                          args.in_html, args.ontology, args.metadata_file, args.out_counts_file,
+                          args.out_tree, args.format, args.out_html, args.compress, args.node_key, args.data_key)
     except Exception as e:
         # exit with error
         logger.exception(e)
